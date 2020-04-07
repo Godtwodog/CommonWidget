@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WheelViewWidget">
+        <!--滚轮中item的字体大小-->
+        <attr name="ItemTextSize" format="dimension"/>
+<!--        滚轮中item的字体颜色-->
+        <attr name="ItemTextColor" format="color"/>
+<!--        控件是否循环滚动-->
+        <attr name="ItemIsLoop" format="boolean"/>
+<!--        间隔线颜色-->
+        <attr name="IndicatorColor" format="color"/>
+<!--      文本格式  -->
+        <attr name="TextGravity" format="enum" >
+            <enum name="CENTER" value="17" />
+            <enum name="LEFT" value="3" />
+            <enum name="RIGHT" value="5" />
+        </attr>
+<!--        未选中区域的字体颜色-->
+        <attr name="ItemOutTextColor" format="color"/>
+    </declare-styleable>
+</resources>

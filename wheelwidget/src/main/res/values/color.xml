@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="WheelItemTextColor">#FF666666</color>
+    <color name="IndicatorColor">#FF999999</color>
+    <color name="UnSelectedTextColor">#FF999999</color>
+</resources>
