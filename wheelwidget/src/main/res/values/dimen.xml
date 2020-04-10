@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="DefaultItemTextSize">16sp</dimen>
+    <dimen name="DefaultIndicatorWidth">1dp</dimen>
+    <integer name="animation_default_duration">300</integer>
 </resources>

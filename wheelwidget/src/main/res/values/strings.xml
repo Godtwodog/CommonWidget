@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WheelWidget</string>
+    <string name="wheelview_cancel">取消</string>
+    <string name="wheelview_submit">确认</string>
 </resources>

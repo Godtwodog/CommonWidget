@@ -11,11 +11,13 @@
         <attr name="IndicatorColor" format="color"/>
 <!--      文本格式  -->
         <attr name="TextGravity" format="enum" >
-            <enum name="CENTER" value="17" />
-            <enum name="LEFT" value="3" />
-            <enum name="RIGHT" value="5" />
+            <enum name="CENTER" value="0" />
+            <enum name="LEFT" value="1" />
+            <enum name="RIGHT" value="2" />
         </attr>
 <!--        未选中区域的字体颜色-->
         <attr name="ItemOutTextColor" format="color"/>
+<!--        间隔线宽度-->
+        <attr name="IndicatorWidth" format="dimension"/>
     </declare-styleable>
 </resources>
