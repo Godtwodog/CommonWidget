@@ -31,7 +31,7 @@ public final class InertiaTimerTask extends TimerTask {
                 mCurrentVelocityY = mFirstVelocityY;
             }
 
-            if (Math.abs(mCurrentVelocityY) > 0.0F &&Math.abs(mCurrentVelocityY) <=20F){
+            if (Math.abs(mCurrentVelocityY) >= 0.0F &&Math.abs(mCurrentVelocityY) <= 20F){
                 wheelWidget.cancelFuture();
                 wheelWidget.getHandler().sendEmptyMessage(MessageHandler.TYPE_SMOOTH_SCROLL);
                 return;
@@ -51,10 +51,10 @@ public final class InertiaTimerTask extends TimerTask {
                     bottom = wheelWidget.getTotalScrollY() + dy;
                 }
 
-                if (wheelWidget.getTotalScrollY() >= top){
+                if (wheelWidget.getTotalScrollY() <= top){
                     mCurrentVelocityY = 40F;
                     wheelWidget.setTotalScrollY((int)top);
-                }else if (wheelWidget.getTotalScrollY() <= bottom){
+                }else if (wheelWidget.getTotalScrollY() >= bottom){
                     mCurrentVelocityY = -40F;
                     wheelWidget.setTotalScrollY((int)bottom);
                 }

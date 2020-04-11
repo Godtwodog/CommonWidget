@@ -41,8 +41,8 @@ public class SmoothScrollTimerTask extends TimerTask {
             //普通模式
             if (!wheelWidget.isLoop()){
                 float itemHeight = wheelWidget.getItemHeight();
-                float top = -wheelWidget.getInitPosition() * itemHeight;
-                float bottom = (wheelWidget.getItemCount() - 1 - wheelWidget.getInitPosition()) * itemHeight;
+                float top = (float) (-wheelWidget.getInitPosition()) * itemHeight;
+                float bottom = (float) (wheelWidget.getItemCount() - 1 - wheelWidget.getInitPosition()) * itemHeight;
                 if (wheelWidget.getTotalScrollY() <= top || wheelWidget.getTotalScrollY() >= bottom){
                     wheelWidget.setTotalScrollY(wheelWidget.getTotalScrollY() - realOffset);
                     wheelWidget.cancelFuture();
