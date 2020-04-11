@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 })
-                .setType(new boolean[]{true, true, true, true, true, true})
-                .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .isDialog(false) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .addOnCancelClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -64,32 +64,33 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setItemVisibleCount(9) //若设置偶数，实际值会加1（比如设置6，则最大可见条目为7）
-                .setLineSpacingMultiplier(2.0f)
+                .setLineSpacingMultiplier(1.6f)
                 .isCenterLabel(false)
                 .isAlphaGradient(true)
-                .setGravity(WheelOptions.TEXT_GRAVITY_CENTER)
+                .setGravity(Gravity.CENTER)
+                .setContentTextSize(20)
                 .isCyclic(true)
                 .build();
 
-        Dialog mDialog = timer.getDialog();
-        if (mDialog != null) {
-
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    Gravity.BOTTOM);
-
-            params.leftMargin = 20;
-            params.rightMargin = 20;
-            timer.getDialogContainerLayout().setLayoutParams(params);
-
-            Window dialogWindow = mDialog.getWindow();
-            if (dialogWindow != null) {
-                dialogWindow.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
-                dialogWindow.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
-                dialogWindow.setDimAmount(0.3f);
-            }
-        }
+//        Dialog mDialog = timer.getDialog();
+//        if (mDialog != null) {
+//
+//            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+//                    ViewGroup.LayoutParams.MATCH_PARENT,
+//                    ViewGroup.LayoutParams.WRAP_CONTENT,
+//                    Gravity.BOTTOM);
+//
+//            params.leftMargin = 0;
+//            params.rightMargin = 0;
+//            timer.getDialogContainerLayout().setLayoutParams(params);
+//
+//            Window dialogWindow = mDialog.getWindow();
+//            if (dialogWindow != null) {
+//                dialogWindow.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
+//                dialogWindow.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
+//                dialogWindow.setDimAmount(0.3f);
+//            }
+//        }
     }
 
 }

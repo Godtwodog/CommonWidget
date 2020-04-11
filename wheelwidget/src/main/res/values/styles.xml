@@ -2,7 +2,7 @@
 <resources>
 
 
-    <style name="custom_dialog" parent="Theme.AppCompat.Dialog">
+    <style name="custom_dialog" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- Dialog的windowFrame框为无 -->
         <item name="android:windowIsFloating">true</item>

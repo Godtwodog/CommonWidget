@@ -85,7 +85,7 @@ public class WheelTime {
         wheelYear.setAdapter(new NumericWheelAdapter(startYear, endYear));
 
         wheelYear.setCurrentItem(year - startYear);
-        wheelYear.setGravity(Gravity.CENTER);
+        wheelYear.setGravity(gravity);
         //月
         wheelMonth = view.findViewById(R.id.month);
         if (startYear == endYear) {
@@ -101,7 +101,7 @@ public class WheelTime {
             wheelMonth.setAdapter(new NumericWheelAdapter(1, 12));
             wheelMonth.setCurrentItem(month);
         }
-        wheelMonth.setGravity(Gravity.CENTER);
+        wheelMonth.setGravity(gravity);
 
         //日
         wheelDay = view.findViewById(R.id.day);
@@ -183,28 +183,28 @@ public class WheelTime {
             }
             wheelDay.setCurrentItem(day - 1);
         }
-        wheelDay.setGravity(Gravity.CENTER);
+        wheelDay.setGravity(gravity);
 
         //小时
         wheelHour = view.findViewById(R.id.hour);
         wheelHour.setAdapter(new NumericWheelAdapter(0, 23));
 
         wheelHour.setCurrentItem(hour);
-        wheelHour.setGravity(Gravity.CENTER);
+        wheelHour.setGravity(gravity);
 
         //分钟
         wheelMinutes = view.findViewById(R.id.minute);
         wheelMinutes.setAdapter(new NumericWheelAdapter(0, 59));
 
         wheelMinutes.setCurrentItem(minute);
-        wheelMinutes.setGravity(Gravity.CENTER);
+        wheelMinutes.setGravity(gravity);
 
         //秒数
         wheelSecond = view.findViewById(R.id.second);
         wheelSecond.setAdapter(new NumericWheelAdapter(0, 59));
 
         wheelSecond.setCurrentItem(second);
-        wheelSecond.setGravity(Gravity.CENTER);
+        wheelSecond.setGravity(gravity);
 
         //对年的监听
         wheelYear.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -555,5 +555,49 @@ public class WheelTime {
 
     public void setEndYear(int endYear) {
         this.endYear = endYear;
+    }
+
+    public void setLabels(String label_year,String label_month,String label_day , String label_hour, String label_minutes, String label_second){
+        if (label_year != null){
+            wheelYear.setLabel(label_year);
+        }else {
+            wheelYear.setLabel(view.getContext().getString(R.string.wheelview_year));
+        }
+        if (label_month != null){
+            wheelMonth.setLabel(label_month);
+        }else {
+            wheelMonth.setLabel(view.getContext().getString(R.string.wheelview_month));
+        }
+        if (label_day != null){
+            wheelDay.setLabel(label_day);
+        }else {
+            wheelDay.setLabel(view.getContext().getString(R.string.wheelview_day));
+        }
+        if (label_hour != null){
+            wheelHour.setLabel(label_hour);
+        }else {
+            wheelHour.setLabel(view.getContext().getString(R.string.wheelview_hour));
+        }
+        if (label_minutes != null){
+            wheelMinutes.setLabel(label_minutes);
+        }else {
+            wheelMinutes.setLabel(view.getContext().getString(R.string.wheelview_minutes));
+        }
+        if (label_second != null){
+            wheelSecond.setLabel(label_second);
+        }else {
+            wheelSecond.setLabel(view.getContext().getString(R.string.wheelview_second));
+        }
+
+    }
+
+    public void isCenterLabel(boolean isCenterLabel) {
+        wheelYear.isCenterlabel(isCenterLabel);
+        wheelMonth.isCenterlabel(isCenterLabel);
+        wheelDay.isCenterlabel(isCenterLabel);
+        wheelHour.isCenterlabel(isCenterLabel);
+        wheelMinutes.isCenterlabel(isCenterLabel);
+        wheelSecond.isCenterlabel(isCenterLabel);
+
     }
 }

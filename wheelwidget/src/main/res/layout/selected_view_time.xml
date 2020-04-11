@@ -23,42 +23,43 @@
             android:id="@+id/year"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.96"
-            app:TextGravity="CENTER"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_bright"
             />
         <com.god2dog.wheelwidget.WheelViewWidget
             android:id="@+id/month"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:TextGravity="CENTER"
+            android:background="@android:color/holo_red_light"
             />
         <com.god2dog.wheelwidget.WheelViewWidget
             android:id="@+id/day"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/holo_blue_bright"
             />
         <com.god2dog.wheelwidget.WheelViewWidget
             android:id="@+id/hour"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:TextGravity="CENTER"
+            android:background="@android:color/holo_red_light"
             />
         <com.god2dog.wheelwidget.WheelViewWidget
             android:id="@+id/minute"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:TextGravity="CENTER"
+            android:background="@android:color/holo_blue_bright"
             />
         <com.god2dog.wheelwidget.WheelViewWidget
             android:id="@+id/second"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:TextGravity="CENTER"
+            android:background="@android:color/holo_red_light"
             />
     </LinearLayout>
 </LinearLayout>

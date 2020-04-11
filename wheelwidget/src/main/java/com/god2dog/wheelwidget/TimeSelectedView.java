@@ -59,6 +59,7 @@ public class TimeSelectedView extends BaseSelectedView implements View.OnClickLi
             btnCancel.setTextColor(mWheelOptions.textColorCancel);
             btnSubmit.setTextColor(mWheelOptions.textColorConfirm);
             tvTitle.setTextColor(mWheelOptions.textColorTitle);
+            topBar.setBackgroundColor(mWheelOptions.bgColorTitle);
             //设置文字大小
             btnCancel.setTextSize(mWheelOptions.textSizeCancel);
             btnSubmit.setTextSize(mWheelOptions.textSizeConfirm);
@@ -120,21 +121,22 @@ public class TimeSelectedView extends BaseSelectedView implements View.OnClickLi
         }
 
         setTime();
+        wheelTime.setLabels(mWheelOptions.label_year,mWheelOptions.label_month,mWheelOptions.label_day,
+                mWheelOptions.label_hours,mWheelOptions.label_minutes,mWheelOptions.label_seconds);
         wheelTime.setTextXOffset(mWheelOptions.x_offset_year,mWheelOptions.x_offset_month,mWheelOptions.x_offset_day,
                 mWheelOptions.x_offset_hours,mWheelOptions.x_offset_minutes,mWheelOptions.x_offset_seconds);
         wheelTime.setItemVisible(mWheelOptions.itemVisibleCount);
         wheelTime.setAlphaGradient(mWheelOptions.isAlphaGradient);
-        setOutSideCancelable(mWheelOptions.cancelable);
+        setOutsideCancelable(mWheelOptions.cancelable);
         wheelTime.setCyclic(mWheelOptions.isCyclic);
         wheelTime.setDividerColor(mWheelOptions.dividerColor);
         wheelTime.setLineSpacingMultiplier(mWheelOptions.lineSpacingMultiplier);
         wheelTime.setTextColorOut(mWheelOptions.textColorOut);
         wheelTime.setTextColorCenter(mWheelOptions.textColorCenter);
+        wheelTime.isCenterLabel(mWheelOptions.isCenterLabel);
     }
 
-    private void setOutSideCancelable(boolean cancelable) {
 
-    }
 
     public void setDate(Calendar date) {
         mWheelOptions.date = date;

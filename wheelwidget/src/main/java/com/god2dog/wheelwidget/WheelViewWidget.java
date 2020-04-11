@@ -7,10 +7,12 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -21,9 +23,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import static com.god2dog.wheelwidget.WheelOptions.TEXT_GRAVITY_CENTER;
-import static com.god2dog.wheelwidget.WheelOptions.TEXT_GRAVITY_LEFT;
-import static com.god2dog.wheelwidget.WheelOptions.TEXT_GRAVITY_RIGHT;
 
 /**
  * @author god2dog
@@ -39,8 +38,8 @@ public class WheelViewWidget extends View {
     private ScheduledFuture<?> mFuture;
     //修改此值可以修改滑行速度
     private static final int VELOCITY_FLING = 5;
-    private String label;
-    private boolean isCenterlabel = false;
+    private String label;//单位
+    private boolean isCenterlabel = true;
 
     public enum ACTION {
         //点击
@@ -83,7 +82,7 @@ public class WheelViewWidget extends View {
     private float mItemSpaceMultiplier = 1.6F;
     //偏移量
     private float CENTER_CONTENT_OFFSET = 4.0F;
-    private static final float SCALE_CONTENT = 0.8F;
+    private static final float SCALE_CONTENT = 0.9F;
     //控件高度
     private int measureHeight;
     //控件宽度
@@ -121,7 +120,7 @@ public class WheelViewWidget extends View {
     private int preCurrentIndex = 0;
     //初始化位置
     private int initPosition = -1;
-    private int mGravity = TEXT_GRAVITY_CENTER;
+    private int mGravity = Gravity.CENTER;
     //中间文字开始绘制的位置
     private int drawCenterContentStart = 0;
     //区域外文字开始绘制的位置
@@ -149,7 +148,7 @@ public class WheelViewWidget extends View {
 
     public WheelViewWidget(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        DEFAULT_ITEM_TEXT_SIZE = getResources().getDimensionPixelSize(R.dimen.DefaultItemTextSize);
+        mItemTextSize = getResources().getDimensionPixelSize(R.dimen.DefaultItemTextSize);
         DEFAULT_ITEM_TEXT_COLOR = getResources().getColor(R.color.WheelItemTextColor);
         DEFAULT_INDICATOR_COLOR = getResources().getColor(R.color.IndicatorColor);
         DEFAULT_UNSELECTED_TEXT_COLOR = getResources().getColor(R.color.UnSelectedTextColor);
@@ -168,7 +167,7 @@ public class WheelViewWidget extends View {
         }
         if (attrs != null) {
             TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.WheelViewWidget);
-            mItemTextSize = ta.getDimensionPixelSize(R.styleable.WheelViewWidget_ItemTextSize, DEFAULT_ITEM_TEXT_SIZE);
+            mItemTextSize = ta.getDimensionPixelSize(R.styleable.WheelViewWidget_ItemTextSize, mItemTextSize);
             mItemTextColor = ta.getColor(R.styleable.WheelViewWidget_ItemTextColor, DEFAULT_ITEM_TEXT_COLOR);
             mItemOutTextColor = ta.getColor(R.styleable.WheelViewWidget_ItemOutTextColor, DEFAULT_UNSELECTED_TEXT_COLOR);
             isLoop = ta.getBoolean(R.styleable.WheelViewWidget_ItemIsLoop, true);
@@ -230,7 +229,7 @@ public class WheelViewWidget extends View {
         this.widthMeasureSpec = widthMeasureSpec;
         //测量item文字宽度和高度
         measureView();
-        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measureWidth, measureHeight);
     }
 
 
@@ -250,7 +249,7 @@ public class WheelViewWidget extends View {
         try {
             preCurrentIndex = initPosition + change % mAdapter.getItemCount();
         } catch (ArithmeticException e) {
-            Log.d(TAG,e.toString());
+            Log.d(TAG, e.toString());
         }
         if (isLoop) {
             //如果是循环的
@@ -275,10 +274,10 @@ public class WheelViewWidget extends View {
         canvas.drawLine(0.0F, firstLineY, measureWidth, firstLineY, mIndicatorPaint);
         canvas.drawLine(0.0F, secondLineY, measureWidth, secondLineY, mIndicatorPaint);
 
-//        if (!TextUtils.isEmpty(label) && isCenterlabel){
-//            int drawRightContentStart = measureWidth - getTextWidth(mItemTextPaint,label);
-//            canvas.drawText(label,drawRightContentStart - CENTER_CONTENT_OFFSET,centerY,mItemTextPaint);
-//        }
+        if (!TextUtils.isEmpty(label) && isCenterlabel) {
+            int drawRightContentStart = measureWidth - getTextWidth(mItemTextPaint, label);
+            canvas.drawText(label, drawRightContentStart - CENTER_CONTENT_OFFSET, centerY, mItemTextPaint);
+        }
 
         //对角度进行计算a
         int count = 0;
@@ -292,9 +291,9 @@ public class WheelViewWidget extends View {
                 //递归获得目标位置
                 index = recursionGetLoopIndex(index);
                 showText = mAdapter.getItem(index);
-            } else if (index < 0 ) {
+            } else if (index < 0) {
                 showText = "";
-            }else if (index > mAdapter.getItemCount() - 1){
+            } else if (index > mAdapter.getItemCount() - 1) {
                 showText = "";
             } else {
                 showText = mAdapter.getItem(index);
@@ -304,7 +303,7 @@ public class WheelViewWidget extends View {
             float arc = itemHeight * count - itemHeightOffset;
             //计算弧度 弧度 = 弧长 / 半径
             float radian = arc / radius;
-            Log.i(TAG,"弧度:__"+radian);
+            Log.i(TAG, "弧度:__" + radian);
             //计算角度
             //顺时针90度旋转，使其处于第一和第四象限
             float angle = (float) (90D - (radian / Math.PI) * 180D);
@@ -315,11 +314,11 @@ public class WheelViewWidget extends View {
                 //获取 展示文本内容
                 String contentText;
 
-//                if (!isCenterlabel && TextUtils.isEmpty(label) && !TextUtils.isEmpty(getContentText(showText))){
-//                    contentText = getContentText(showText) + label;
-//                }else {
+                if (!isCenterlabel && !TextUtils.isEmpty(label) && !TextUtils.isEmpty(getContentText(showText))) {
+                    contentText = getContentText(showText) + label;
+                } else {
                     contentText = getContentText(showText);
-//                }
+                }
                 float offset = (float) Math.pow(Math.abs(angle) / 90F, 2.2);
                 //重新测量文本内容 以适应控件大小
                 reMeasureContentText(contentText);
@@ -327,52 +326,53 @@ public class WheelViewWidget extends View {
                 measureCenterContentStart(contentText);
                 measureOutContentStart(contentText);
 
-                Log.i(TAG,"drawOutContentStart:"+drawOutContentStart);
-                Log.i(TAG,"drawCenterContentStart:"+drawCenterContentStart);
+                Log.i(TAG, "drawOutContentStart:" + drawOutContentStart);
+                Log.i(TAG, "drawCenterContentStart:" + drawCenterContentStart);
 
                 //获得Y滚动
                 float translateY = (float) (radius - Math.cos(radian) * radius - Math.sin(radian) * maxTextHeight / 2D);
                 canvas.translate(0.0F, translateY);
 
-                if (translateY <= firstLineY && translateY + maxTextHeight >= firstLineY ) {
+                if (translateY <= firstLineY && translateY + maxTextHeight >= firstLineY) {
                     //item经过第一条线firstLineY
                     canvas.save();
                     canvas.clipRect(0, 0, measureWidth, firstLineY - translateY);
-                    canvas.scale(1.0F, (float) (Math.sin(radian)  * SCALE_CONTENT));
+                    canvas.scale(1.0F, (float) (Math.sin(radian) * SCALE_CONTENT));
                     //设置外部文字
                     setOutPaintStyle(offset, angle);
-                    canvas.drawText(contentText, drawOutContentStart, maxTextHeight, mItemOutPaint);
+                    canvas.drawText(contentText, drawOutContentStart , maxTextHeight, mItemOutPaint);
                     canvas.restore();
                     canvas.save();
                     canvas.clipRect(0, firstLineY - translateY, measureWidth, (int) itemHeight);
-                    canvas.scale(1.0F, (float) (Math.sin(radian)  * 1.0F));
-                    canvas.drawText(contentText, drawCenterContentStart, maxTextHeight - CENTER_CONTENT_OFFSET, mItemTextPaint);
+                    canvas.scale(1.0F, (float) (Math.sin(radian) * 1.0F));
+                    canvas.drawText(contentText, drawCenterContentStart , maxTextHeight - CENTER_CONTENT_OFFSET, mItemTextPaint);
                     canvas.restore();
                 } else if (translateY <= secondLineY && translateY >= secondLineY - maxTextHeight) {
                     //item经过第二条线 secondLineY
                     canvas.save();
                     canvas.clipRect(0, 0, measureWidth, secondLineY - translateY);
-                    canvas.scale(1.0F, (float) (Math.sin(radian)  * 1.0F));
+                    canvas.scale(1.0F, (float) (Math.sin(radian) * 1.0F));
                     canvas.drawText(contentText, drawCenterContentStart, maxTextHeight - CENTER_CONTENT_OFFSET, mItemTextPaint);
                     canvas.restore();
                     canvas.save();
-                    canvas.clipRect(0, secondLineY - translateY, measureWidth, (int)itemHeight);
-                    canvas.scale(1.0F, (float) (Math.sin(radian)  * SCALE_CONTENT));
-                    setOutPaintStyle(offset,angle);
+                    canvas.clipRect(0, secondLineY - translateY, measureWidth, (int) itemHeight);
+                    canvas.scale(1.0F, (float) (Math.sin(radian) * SCALE_CONTENT));
+                    setOutPaintStyle(offset, angle);
                     canvas.drawText(contentText, drawOutContentStart, maxTextHeight, mItemOutPaint);
                     canvas.restore();
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
 
                     float Y = maxTextHeight - CENTER_CONTENT_OFFSET;
-                    canvas.drawText(contentText, drawCenterContentStart, Y, mItemTextPaint);
+                    canvas.drawText(contentText, drawCenterContentStart , Y, mItemTextPaint);
                     //设置选中项
                     selectedItem = preCurrentIndex - (itemCount / 2 - count);
                 } else {
                     canvas.save();
                     canvas.clipRect(0, 0, measureWidth, (int) itemHeight);
-                    canvas.scale(1.0F, (float) (Math.sin(radian)  * SCALE_CONTENT));
+                    canvas.scale(1.0F, (float) (Math.sin(radian) * SCALE_CONTENT));
                     setOutPaintStyle(offset, angle);
                     canvas.drawText(contentText, drawOutContentStart + textOffset * offset, maxTextHeight, mItemOutPaint);
+                    Log.i(TAG,"文字起始位置:"+drawOutContentStart + textOffset * offset);
                     canvas.restore();
                 }
                 canvas.restore();
@@ -384,10 +384,10 @@ public class WheelViewWidget extends View {
 
     private int getTextWidth(Paint paint, String label) {
         int iRet = 0;
-        if (label != null && label.length() > 0){
+        if (label != null && label.length() > 0) {
             int length = label.length();
             float[] widths = new float[length];
-            paint.getTextWidths(label,widths);
+            paint.getTextWidths(label, widths);
             for (int i = 0; i < length; i++) {
                 iRet += Math.ceil(widths[i]);
             }
@@ -398,34 +398,40 @@ public class WheelViewWidget extends View {
     private void measureOutContentStart(String contentText) {
         Rect rect = new Rect();
         mItemOutPaint.getTextBounds(contentText, 0, contentText.length(), rect);
-//        switch (mGravity) {
-//            case TEXT_GRAVITY_CENTER:
+        Log.i(TAG, "out文字_"+contentText);
+        switch (mGravity) {
+            case Gravity.CENTER:
                 drawOutContentStart = (int) ((measureWidth - rect.width()) * 0.5);
-//                break;
-//            case TEXT_GRAVITY_LEFT:
-//                drawOutContentStart = 0;
-//                break;
-//            case TEXT_GRAVITY_RIGHT:
-//                drawOutContentStart = measureWidth - rect.width() - (int) CENTER_CONTENT_OFFSET;
-//                break;
-//        }
+                Log.i(TAG, "Center文字drawOutContentStart_"+drawOutContentStart);
+                break;
+            case Gravity.LEFT:
+                drawOutContentStart = 0;
+                break;
+            case Gravity.RIGHT:
+                drawOutContentStart = measureWidth - rect.width() - (int) CENTER_CONTENT_OFFSET;
+                break;
+        }
 
     }
 
     private void measureCenterContentStart(String contentText) {
         Rect rect = new Rect();
         mItemTextPaint.getTextBounds(contentText, 0, contentText.length(), rect);
-//        switch (mGravity) {
-//            case TEXT_GRAVITY_CENTER:
+        Log.i(TAG, "Center文字_"+contentText);
+        switch (mGravity) {
+            case Gravity.CENTER:
                 drawCenterContentStart = (int) ((measureWidth - rect.width()) * 0.5);
-//                break;
-//            case TEXT_GRAVITY_LEFT:
-//                drawCenterContentStart = 0;
-//                break;
-//            case TEXT_GRAVITY_RIGHT:
-//                drawCenterContentStart = measureWidth - rect.width() - (int) CENTER_CONTENT_OFFSET;
-//                break;
-//        }
+                Log.i(TAG, "measureWidth_drawCenterContentStart_"+measureWidth);
+                Log.i(TAG, "rect.width_drawCenterContentStart_"+rect.width());
+                Log.i(TAG, "Center文字drawCenterContentStart_"+drawCenterContentStart);
+                break;
+            case Gravity.LEFT:
+                drawCenterContentStart = 0;
+                break;
+            case Gravity.RIGHT:
+                drawCenterContentStart = measureWidth - rect.width() - (int) CENTER_CONTENT_OFFSET;
+                break;
+        }
     }
 
     private void setOutPaintStyle(float offset, float angle) {
@@ -448,11 +454,13 @@ public class WheelViewWidget extends View {
         int width = rect.width();
         int size = mItemTextSize;
         while (width > measureWidth) {
+            Log.i(TAG,"最终文字大小："+size);
             size--;
             mItemTextPaint.setTextSize(size);
             mItemTextPaint.getTextBounds(contentText, 0, contentText.length(), rect);
             width = rect.width();
         }
+        mItemOutPaint.setTextSize(size);
     }
 
 
@@ -475,7 +483,7 @@ public class WheelViewWidget extends View {
                 float dy = previousY - event.getRawY();
                 previousY = event.getRawY();
                 totalScrollY = totalScrollY + dy;
-                Log.i(TAG,"移动总距离:"+totalScrollY);
+                Log.i(TAG, "移动总距离:" + totalScrollY);
                 //普通模式
                 if (!isLoop) {
                     if ((totalScrollY - itemHeight * ratio < top && dy < 0)
@@ -554,13 +562,14 @@ public class WheelViewWidget extends View {
         }
         measureItemTextWidthAndHeight();
         //计算控件高度 即半圆周长 可见item数目 -1 为所需item值
-        float halfCircleLength = (itemCount - 1) * itemHeight;
+        int halfCircleLength = (int) ((itemCount - 1) * itemHeight);
         //有半圆周长可得 直径 即为控件高度
         measureHeight = (int) ((halfCircleLength * 2.0F) / Math.PI);
         //计算半径
         radius = (int) (halfCircleLength / Math.PI);
         //获取控件宽度
         measureWidth = MeasureSpec.getSize(widthMeasureSpec);
+        Log.i(TAG,"控件宽度_"+measureWidth);
 
         //计算横线位置和中间基线
         firstLineY = (measureHeight - itemHeight) / 2.0F;
@@ -583,7 +592,7 @@ public class WheelViewWidget extends View {
 
     private void measureItemTextWidthAndHeight() {
         Rect rect = new Rect();
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i < mAdapter.getItemCount(); i++) {
             String temp = getContentText(mAdapter.getItem(i));
             mItemTextPaint.getTextBounds(temp, 0, temp.length(), rect);
 
@@ -593,7 +602,7 @@ public class WheelViewWidget extends View {
                 maxTextWidth = textWidth;
             }
 
-            mItemTextPaint.getTextBounds("星期", 0, 2, rect);
+            mItemTextPaint.getTextBounds("\u661F\u671F", 0, 2, rect);
             maxTextHeight = rect.height() + 2;
             //item高度
             itemHeight = maxTextHeight * mItemSpaceMultiplier;
@@ -770,9 +779,10 @@ public class WheelViewWidget extends View {
     public void setIsLoop(boolean isCyclic) {
         isLoop = isCyclic;
     }
-    public void setTextXOffset(int textOffset){
+
+    public void setTextXOffset(int textOffset) {
         this.textOffset = textOffset;
-        if (textOffset != 0){
+        if (textOffset != 0) {
             mItemTextPaint.setTextScaleX(1.0f);
         }
     }
@@ -781,7 +791,7 @@ public class WheelViewWidget extends View {
         this.label = label;
     }
 
-    public void setCenterlabel(boolean centerlabel) {
+    public void isCenterlabel(boolean centerlabel) {
         isCenterlabel = centerlabel;
     }
 
@@ -794,4 +804,6 @@ public class WheelViewWidget extends View {
     public Handler getHandler() {
         return handler;
     }
+
+
 }

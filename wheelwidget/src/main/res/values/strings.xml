@@ -2,4 +2,10 @@
     <string name="app_name">WheelWidget</string>
     <string name="wheelview_cancel">取消</string>
     <string name="wheelview_submit">确认</string>
+    <string name="wheelview_year">年</string>
+    <string name="wheelview_month">月</string>
+    <string name="wheelview_day">日</string>
+    <string name="wheelview_hour">时</string>
+    <string name="wheelview_minutes">分</string>
+    <string name="wheelview_second">秒</string>
 </resources>
