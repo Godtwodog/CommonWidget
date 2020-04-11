@@ -1,7 +1,9 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.listener;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.god2dog.wheelwidget.view.WheelViewWidget;
 
 /**
  * @author god2dog
@@ -9,7 +11,7 @@ import android.view.MotionEvent;
  * 创建日期：2020/4/7
  * 描述：CommonWidget
  */
-class WheelViewGestureListener extends GestureDetector.SimpleOnGestureListener {
+public class WheelViewGestureListener extends GestureDetector.SimpleOnGestureListener {
     private final WheelViewWidget wheelWidget;
 
     public WheelViewGestureListener(WheelViewWidget wheelWidget) {

@@ -1,10 +1,16 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.builder;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
+
+import com.god2dog.wheelwidget.WheelOptions;
+import com.god2dog.wheelwidget.listener.CustomListener;
+import com.god2dog.wheelwidget.listener.OnTimeSelectChangeListener;
+import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
+import com.god2dog.wheelwidget.view.TimeSelectedView;
 
 import java.util.Calendar;
 
@@ -17,7 +23,7 @@ import java.util.Calendar;
 public class TimeSelectBuilder {
     private WheelOptions mWheelOptions;
 
-    public TimeSelectBuilder (Context context,OnTimeSelectListener onTimeSelectListener){
+    public TimeSelectBuilder (Context context, OnTimeSelectListener onTimeSelectListener){
         mWheelOptions = new WheelOptions();
         mWheelOptions.context = context;
         mWheelOptions.timeSelectListener = onTimeSelectListener;

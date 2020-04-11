@@ -1,4 +1,7 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.timer;
+
+import com.god2dog.wheelwidget.MessageHandler;
+import com.god2dog.wheelwidget.view.WheelViewWidget;
 
 import java.util.TimerTask;
 

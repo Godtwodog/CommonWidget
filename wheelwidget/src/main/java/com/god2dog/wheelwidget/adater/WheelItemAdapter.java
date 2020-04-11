@@ -1,4 +1,4 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.adater;
 
 /**
  * @author god2dog

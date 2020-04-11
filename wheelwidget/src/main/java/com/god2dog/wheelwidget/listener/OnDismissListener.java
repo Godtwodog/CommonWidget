@@ -1,4 +1,4 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.listener;
 
 import android.view.View;
 
@@ -8,6 +8,6 @@ import android.view.View;
  * 创建日期：2020/4/8
  * 描述：CommonWidget
  */
-interface OnDismissListener {
+public interface OnDismissListener {
     void onDismiss(Object o);
 }

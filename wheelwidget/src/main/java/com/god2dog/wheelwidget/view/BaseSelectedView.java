@@ -1,6 +1,5 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.view;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +14,10 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.PopupWindow;
+
+import com.god2dog.wheelwidget.R;
+import com.god2dog.wheelwidget.WheelOptions;
+import com.god2dog.wheelwidget.listener.OnDismissListener;
 
 /**
  * @author god2dog

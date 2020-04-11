@@ -1,4 +1,4 @@
-package com.god2dog.wheelwidget;
+package com.god2dog.wheelwidget.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +17,14 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.god2dog.wheelwidget.timer.InertiaTimerTask;
+import com.god2dog.wheelwidget.MessageHandler;
+import com.god2dog.wheelwidget.listener.OnItemSelectedListener;
+import com.god2dog.wheelwidget.R;
+import com.god2dog.wheelwidget.timer.SmoothScrollTimerTask;
+import com.god2dog.wheelwidget.adater.WheelItemAdapter;
+import com.god2dog.wheelwidget.listener.WheelViewGestureListener;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -205,12 +213,10 @@ public class WheelViewWidget extends View {
         mItemTextPaint = new Paint();
         mItemTextPaint.setColor(mItemTextColor);
         mItemTextPaint.setAntiAlias(true);
-        mItemTextPaint.setTextAlign(Paint.Align.CENTER);
         mItemTextPaint.setTypeface(mTypeface);
         mItemTextPaint.setTextSize(mItemTextSize);
 
         mItemOutPaint = new Paint();
-        mItemOutPaint.setTextAlign(Paint.Align.CENTER);
         mItemOutPaint.setTypeface(mTypeface);
         mItemOutPaint.setAntiAlias(true);
         mItemOutPaint.setTextSize(mItemTextSize);
@@ -326,9 +332,6 @@ public class WheelViewWidget extends View {
                 measureCenterContentStart(contentText);
                 measureOutContentStart(contentText);
 
-                Log.i(TAG, "drawOutContentStart:" + drawOutContentStart);
-                Log.i(TAG, "drawCenterContentStart:" + drawCenterContentStart);
-
                 //获得Y滚动
                 float translateY = (float) (radius - Math.cos(radian) * radius - Math.sin(radian) * maxTextHeight / 2D);
                 canvas.translate(0.0F, translateY);
@@ -421,9 +424,6 @@ public class WheelViewWidget extends View {
         switch (mGravity) {
             case Gravity.CENTER:
                 drawCenterContentStart = (int) ((measureWidth - rect.width()) * 0.5);
-                Log.i(TAG, "measureWidth_drawCenterContentStart_"+measureWidth);
-                Log.i(TAG, "rect.width_drawCenterContentStart_"+rect.width());
-                Log.i(TAG, "Center文字drawCenterContentStart_"+drawCenterContentStart);
                 break;
             case Gravity.LEFT:
                 drawCenterContentStart = 0;

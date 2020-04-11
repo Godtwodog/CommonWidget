@@ -1,6 +1,4 @@
-package com.god2dog.wheelwidget;
-
-import java.util.IllegalFormatException;
+package com.god2dog.wheelwidget.adater;
 
 /**
  * @author god2dog

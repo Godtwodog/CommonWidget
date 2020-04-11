@@ -2,21 +2,16 @@ package com.god2dog.commonwidget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
-import com.god2dog.wheelwidget.OnTimeSelectChangeListener;
-import com.god2dog.wheelwidget.OnTimeSelectListener;
-import com.god2dog.wheelwidget.TimeSelectBuilder;
-import com.god2dog.wheelwidget.TimeSelectedView;
-import com.god2dog.wheelwidget.WheelOptions;
+import com.god2dog.wheelwidget.listener.OnTimeSelectChangeListener;
+import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
+import com.god2dog.wheelwidget.builder.TimeSelectBuilder;
+import com.god2dog.wheelwidget.view.TimeSelectedView;
 
 import java.util.Date;
 
@@ -55,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 })
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true, true, true, true, true, true})
                 .isDialog(false) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .addOnCancelClickListener(new View.OnClickListener() {
                     @Override
