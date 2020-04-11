@@ -592,12 +592,12 @@ public class WheelTime {
     }
 
     public void isCenterLabel(boolean isCenterLabel) {
-        wheelYear.isCenterlabel(isCenterLabel);
-        wheelMonth.isCenterlabel(isCenterLabel);
-        wheelDay.isCenterlabel(isCenterLabel);
-        wheelHour.isCenterlabel(isCenterLabel);
-        wheelMinutes.isCenterlabel(isCenterLabel);
-        wheelSecond.isCenterlabel(isCenterLabel);
+        wheelYear.isCenterLabel(isCenterLabel);
+        wheelMonth.isCenterLabel(isCenterLabel);
+        wheelDay.isCenterLabel(isCenterLabel);
+        wheelHour.isCenterLabel(isCenterLabel);
+        wheelMinutes.isCenterLabel(isCenterLabel);
+        wheelSecond.isCenterLabel(isCenterLabel);
 
     }
 }

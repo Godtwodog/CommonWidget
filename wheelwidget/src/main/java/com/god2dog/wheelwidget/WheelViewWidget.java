@@ -791,7 +791,7 @@ public class WheelViewWidget extends View {
         this.label = label;
     }
 
-    public void isCenterlabel(boolean centerlabel) {
+    public void isCenterLabel(boolean centerlabel) {
         isCenterlabel = centerlabel;
     }
 
