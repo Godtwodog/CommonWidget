@@ -1,5 +1,6 @@
 package com.god2dog.wheelwidget.view;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -71,11 +72,11 @@ public class BaseSelectedView {
     };
 
     private boolean isShowing() {
-//        if (isDialog()) {
+        if (isDialog()) {
             return false;
-//        } else {
-//            return rootView.getParent() != null || isShowing;
-//        }
+        } else {
+            return rootView.getParent() != null || isShowing;
+        }
     }
 
     public BaseSelectedView(Context context) {
@@ -88,7 +89,7 @@ public class BaseSelectedView {
                 Gravity.BOTTOM);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-//        if (isDialog()) {
+        if (isDialog()) {
             //对话框形式
             dialogView = (ViewGroup) layoutInflater.inflate(R.layout.layout_base_wheelview, null, false);
             //设置背景色为透明
@@ -108,22 +109,22 @@ public class BaseSelectedView {
                     dismiss();
                 }
             });
-//        } else {
-//            //如果只是展示在屏幕的下面
-//            //获取根布局
-//            if (mWheelOptions.decorView == null) {
-//                mWheelOptions.decorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
-//            }
-//            rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_base_wheelview, mWheelOptions.decorView, false);
-//            rootView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//            //设置背景色
-//            if (mWheelOptions.outSideColor != -1) {
-//                rootView.setBackgroundColor(mWheelOptions.outSideColor);
-//            }
-//
-//            contentContainer = rootView.findViewById(R.id.content_container);
-//            contentContainer.setLayoutParams(layoutParams);
-//        }
+        } else {
+            //如果只是展示在屏幕的下面
+            //获取根布局
+            if (mWheelOptions.decorView == null) {
+                mWheelOptions.decorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
+            }
+            rootView = (ViewGroup) layoutInflater.inflate(R.layout.layout_base_wheelview, mWheelOptions.decorView, false);
+            rootView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            //设置背景色
+            if (mWheelOptions.outSideColor != -1) {
+                rootView.setBackgroundColor(mWheelOptions.outSideColor);
+            }
+
+            contentContainer = rootView.findViewById(R.id.content_container);
+            contentContainer.setLayoutParams(layoutParams);
+        }
         setKeyBackCancelable(true);
     }
     protected void initEvents(){
@@ -132,11 +133,11 @@ public class BaseSelectedView {
 
     private void setKeyBackCancelable(boolean isCancelable) {
         ViewGroup view;
-//        if (isDialog()) {
+        if (isDialog()) {
             view = dialogView;
-//        } else {
-//            view = rootView;
-//        }
+        } else {
+            view = rootView;
+        }
         view.setFocusable(isCancelable);
         view.setFocusableInTouchMode(isCancelable);
 
@@ -148,35 +149,35 @@ public class BaseSelectedView {
     }
 
     public void dismiss() {
-//        if (isDialog()) {
+        if (isDialog()) {
             dismissDialog();
-//        } else {
-//            if (dismissing) {
-//                return;
-//            }
-//            if (isAnim) {
-//                outAnim.setAnimationListener(new Animation.AnimationListener() {
-//
-//                    @Override
-//                    public void onAnimationStart(Animation animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animation animation) {
-//                        dismissImmediately();
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animation animation) {
-//
-//                    }
-//                });
-//            } else {
-//                dismissImmediately();
-//            }
-//            dismissing = true;
-//        }
+        } else {
+            if (dismissing) {
+                return;
+            }
+            if (isAnim) {
+                outAnim.setAnimationListener(new Animation.AnimationListener() {
+
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        dismissImmediately();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            } else {
+                dismissImmediately();
+            }
+            dismissing = true;
+        }
     }
 
     private void dismissImmediately() {
@@ -289,16 +290,16 @@ public class BaseSelectedView {
     }
 
     public void show() {
-//        if (isDialog()) {
+        if (isDialog()) {
             showDialog();
-//        } else {
-//            if (isShowing()) {
-//                return;
-//            }
-//            isShowing = true;
-//            onAttached(rootView);
-//            rootView.requestFocus();
-//        }
+        } else {
+            if (isShowing()) {
+                return;
+            }
+            isShowing = true;
+            onAttached(rootView);
+            rootView.requestFocus();
+        }
     }
 
     private void onAttached(View view) {

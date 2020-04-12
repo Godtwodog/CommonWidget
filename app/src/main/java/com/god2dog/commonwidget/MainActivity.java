@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setType(new boolean[]{true, true, true, true, true, true})
-                .isDialog(false) //默认设置false ，内部实现将DecorView 作为它的父控件。
+                .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .addOnCancelClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .setItemVisibleCount(9) //若设置偶数，实际值会加1（比如设置6，则最大可见条目为7）
-                .setLineSpacingMultiplier(1.6f)
+                .setLineSpacingMultiplier(1.8f)
                 .isCenterLabel(false)
                 .isAlphaGradient(true)
                 .setGravity(Gravity.CENTER)
