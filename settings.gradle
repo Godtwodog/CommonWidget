@@ -1,2 +1,2 @@
-include ':app', ':wheelwidget'
+include ':app', ':wheelwidget', ':dialoglibrary'
 rootProject.name='CommonWidget'

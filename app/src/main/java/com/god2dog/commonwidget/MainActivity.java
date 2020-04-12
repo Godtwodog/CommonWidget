@@ -1,18 +1,27 @@
 package com.god2dog.commonwidget;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.god2dog.dialoglibrary.BottomDialog;
+import com.god2dog.dialoglibrary.BottomListDialog;
+import com.god2dog.dialoglibrary.CustomDialog;
+import com.god2dog.dialoglibrary.Item;
+import com.god2dog.dialoglibrary.OnItemClickListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectChangeListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
 import com.god2dog.wheelwidget.builder.TimeSelectBuilder;
 import com.god2dog.wheelwidget.view.TimeSelectedView;
+import com.google.android.material.appbar.AppBarLayout;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
         initTimePicker();
+
+        initBottomDialog();
+
+        initBottomListDialog();
 
         Button button = findViewById(R.id.btnShowDialog);
 
@@ -31,6 +47,108 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 timer.show();
+            }
+        });
+    }
+
+    private void initBottomListDialog() {
+        final ArrayList<Item> items = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Item item = new Item();
+            item.setTitle("第"+(i + 1) +"个item");
+
+            items.add(item);
+        }
+
+        findViewById(R.id.bottomListDialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomListDialog dialog = new BottomListDialog(MainActivity.this);
+                dialog.addItemList(items, new OnItemClickListener() {
+                    @Override
+                    public void click(Item item) {
+                        Toast.makeText(MainActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+    }
+
+    private void initBottomDialog() {
+        findViewById(R.id.horizontal_single).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new BottomDialog(MainActivity.this)
+                        .title(R.string.share_title)
+                        .orientation(CustomDialog.HORIZONTAL)
+                        .inflateMenu(R.menu.menu_share, new OnItemClickListener() {
+                            @Override
+                            public void click(Item item) {
+                                Toast.makeText(MainActivity.this, getString(R.string.share_title) + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.horizontal_multi).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new BottomDialog(MainActivity.this)
+                        .title(R.string.share_title)
+                        .orientation(CustomDialog.HORIZONTAL)
+                        .inflateMenu(R.menu.menu_share, new OnItemClickListener() {
+                            @Override
+                            public void click(Item item) {
+                                Toast.makeText(MainActivity.this, getString(R.string.share_title) + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .inflateMenu(R.menu.menu_main, new OnItemClickListener() {
+                            @Override
+                            public void click(Item item) {
+                                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.vertical).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new BottomDialog(MainActivity.this)
+                        .title(R.string.title_item)
+                        .orientation(CustomDialog.VERTICAL)
+                        .inflateMenu(R.menu.menu_share, new OnItemClickListener() {
+                            @Override
+                            public void click(Item item) {
+                                Toast.makeText(MainActivity.this, getString(R.string.share_title) + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        findViewById(R.id.grid).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new BottomDialog(MainActivity.this)
+                        .title(R.string.title_item)
+                        .layout(CustomDialog.GRID)
+                        .orientation(CustomDialog.VERTICAL)
+                        .inflateMenu(R.menu.menu_grid, new OnItemClickListener() {
+                            @Override
+                            public void click(Item item) {
+                                Toast.makeText(MainActivity.this, getString(R.string.share_title) + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
             }
         });
     }
