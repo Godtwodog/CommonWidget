@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f6f8"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                android:id="@+id/iv_arrow_flag"
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/iv_arrow_flag"
+                android:gravity="center_vertical"
+                android:textColor="#ff666666"
+                android:textSize="12sp"
+                tools:text="@string/right_message" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:text="@string/right_hint"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:text="@string/right_input"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/iv_delete"
+                android:gravity="center_vertical"
+                android:text="@string/right_input"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <ImageView
+                android:id="@+id/iv_left_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="20dp"
+                android:src="@mipmap/ic_setting"
+
+                />
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                android:layout_toRightOf="@+id/iv_left_setting"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabMultiLineStyle">
+
+            <TextView
+                android:id="@+id/tv_main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#FF333333"
+                android:textSize="16sp"
+                tools:text="@string/left_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_main_title"
+                android:layout_marginTop="5dp"
+                android:text="@string/left_subhead" />
+
+            <ImageView
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabMultiLineStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                android:id="@+id/iv_multi_line_arrow"
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+
+            <TextView
+                android:id="@+id/tv_right_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_toLeftOf="@+id/iv_multi_line_arrow"
+                android:gravity="center_vertical"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                tools:text="@string/right_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_right_title"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@+id/iv_multi_line_arrow"
+                android:text="@string/right_content_message" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabMultiLineStyle">
+
+            <ImageView
+                android:id="@+id/iv_style_1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_blue_circle" />
+
+            <TextView
+                android:id="@+id/tv_main_title_style_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/iv_style_1"
+                android:textColor="#FF333333"
+                android:textSize="16sp"
+                tools:text="@string/left_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_main_title_style_1"
+                android:layout_alignLeft="@+id/tv_main_title_style_1"
+                android:layout_marginTop="5dp"
+                android:text="@string/left_subhead" />
+
+            <ImageView
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabMultiLineStyle">
+
+            <TextView
+                android:id="@+id/tv_style_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="#FF333333"
+                android:textSize="16sp"
+                tools:text="@string/left_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_style_2"
+                android:layout_marginTop="5dp"
+                android:text="@string/left_subhead" />
+
+            <ImageView
+                android:id="@+id/iv_arrow_2"
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+
+            <ImageView
+                android:id="@+id/iv_style_2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow_2"
+                android:src="@mipmap/ic_blue_circle" />
+
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/BaseUserTabStyle">
+
+            <TextView
+                style="@style/BaseUserTabLeftTitleStyle"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                android:id="@+id/iv_arrow_3"
+                style="@style/BaseUserTabRightArrowStyle"
+                android:src="@mipmap/ic_arrow_right" />
+
+            <ImageView
+                android:id="@+id/iv_style_3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/iv_arrow_3"
+                android:src="@mipmap/ic_blue_circle" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

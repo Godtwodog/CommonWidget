@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="baseUserTabHeight">50dp</dimen>
+    <dimen name="baseUserTabPadding">15dp</dimen>
+    <dimen name="defaultTitleSize">16sp</dimen>
+    <dimen name="defaultArrowPadding">10dp</dimen>
+    <dimen name="baseUserTabTopMargin">10dp</dimen>
+    <dimen name="baseUserTabMultiLineHeight">70dp</dimen>
+</resources>

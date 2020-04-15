@@ -8,4 +8,36 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="BaseUserTabStyle">
+        <item name="android:background">@color/baseUserTabBackgroundColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/baseUserTabHeight</item>
+        <item name="android:paddingLeft">@dimen/baseUserTabPadding</item>
+        <item name="android:paddingRight">@dimen/baseUserTabPadding</item>
+        <item name="android:layout_marginTop">@dimen/baseUserTabTopMargin</item>
+    </style>
+    <style name="BaseUserTabMultiLineStyle">
+        <item name="android:background">@color/baseUserTabBackgroundColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/baseUserTabMultiLineHeight</item>
+        <item name="android:paddingLeft">@dimen/baseUserTabPadding</item>
+        <item name="android:paddingRight">@dimen/baseUserTabPadding</item>
+        <item name="android:layout_marginTop">@dimen/baseUserTabTopMargin</item>
+    </style>
+
+    <style name="BaseUserTabLeftTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/default_title_color</item>
+        <item name="android:textSize">@dimen/defaultTitleSize</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="BaseUserTabRightArrowStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:paddingLeft">@dimen/defaultArrowPadding</item>
+    </style>
+
 </resources>

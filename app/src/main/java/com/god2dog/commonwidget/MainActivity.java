@@ -2,6 +2,7 @@ package com.god2dog.commonwidget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -45,6 +46,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 timer.show();
+            }
+        });
+
+        initJump();
+    }
+
+    private void initJump() {
+        //toast 页面
+        findViewById(R.id.jump2toast).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ToastActivity.class));
             }
         });
     }

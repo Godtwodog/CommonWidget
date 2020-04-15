@@ -23,4 +23,12 @@
     <string name="source_on_github">Github位置</string>
     <string name="title_item">功能</string>
 
+    <!--    功能性标题栏-->
+    <string name="left_title">我是标题</string>
+    <string name="right_message">我是描述</string>
+    <string name="right_hint">我是默认提示文案</string>
+    <string name="right_input">我是输入后文案</string>
+    <string name="right_content">我是内容</string>
+    <string name="left_subhead">我是副标题</string>
+    <string name="right_content_message">我是内容说明</string>
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ToastActivity">
+
+    <Button
+        android:id="@+id/showCommonToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="common toast"
+        />
+    <Button
+        android:id="@+id/showMultilineToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="multiline toast"
+        />
+    <Button
+        android:id="@+id/showSingleLineToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="single line toast"
+        />
+    <Button
+        android:id="@+id/showErrorToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="error toast"
+        />
+    <Button
+        android:id="@+id/showSuccessToast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="success toast"
+        />
+</LinearLayout>
