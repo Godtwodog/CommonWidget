@@ -29,4 +29,5 @@ dependencies {
     implementation project(path: ':wheelwidget')
     implementation project(path: ':dialoglibrary')
     implementation 'com.google.android.material:material:1.1.0'
+    implementation project(path: ':addresspickerview')
 }

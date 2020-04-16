@@ -3,13 +3,17 @@ package com.god2dog.commonwidget;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.god2dog.addresspickerview.AddressModel;
+import com.god2dog.addresspickerview.AddressPickerView;
 import com.god2dog.dialoglibrary.BottomDialog;
 import com.god2dog.dialoglibrary.BottomListDialog;
 import com.god2dog.dialoglibrary.CustomDialog;
@@ -20,11 +24,20 @@ import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
 import com.god2dog.wheelwidget.builder.TimeSelectBuilder;
 import com.god2dog.wheelwidget.view.TimeSelectedView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TimeSelectedView timer;
+    private int[] i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +63,73 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initJump();
+
+        initAddress();
+    }
+
+    private void initAddress() {
+        final List<AddressModel> datas = new ArrayList<>();
+        final Button addressButton = findViewById(R.id.showAddressPickerView);
+        String json = getCityJson();
+        try {
+            JSONArray a1 = new JSONArray(json);
+            for (int i = 0; i < a1.length(); i++) {
+                JSONObject j1 = a1.optJSONObject(i);
+                AddressModel m1 = new AddressModel();
+                m1.setName(j1.optString("label"));
+                m1.setValue(j1.optString("value"));
+                m1.setStatus(false);
+                JSONArray a2 = j1.optJSONArray("children");
+                List<AddressModel.CityModel> cModels = new ArrayList<>();
+                for (int j = 0; j < a2.length(); j++) {
+                    JSONObject j2 = a2.optJSONObject(j);
+                    AddressModel.CityModel c2 = new AddressModel.CityModel();
+                    c2.setName(j2.optString("label"));
+                    c2.setValue(j2.optString("value"));
+                    c2.setStatus(false);
+                    JSONArray a3 = j2.optJSONArray("children");
+                    List<AddressModel.CityModel.AreaModel> aModels = new ArrayList<>();
+                    if (a3 != null) {
+                        for (int n = 0; n < a3.length(); n++) {
+                            JSONObject j3 = a3.optJSONObject(n);
+                            AddressModel.CityModel.AreaModel m3 = new AddressModel.CityModel.AreaModel();
+                            m3.setName(j3.optString("label"));
+                            m3.setValue(j3.optString("value"));
+                            m3.setStatus(false);
+                            aModels.add(m3);
+                        }
+                        c2.setAreaModels(aModels);
+                        cModels.add(c2);
+                    }
+                }
+                m1.setCityModels(cModels);
+                datas.add(m1);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final AddressPickerView pickerView = new AddressPickerView(MainActivity.this, datas);
+        pickerView.setAddressPickerViewCallbackk(new AddressPickerView.AddressPickerViewCallback() {
+            @Override
+            public void callback(int... value) {
+                i = value;
+                if (value.length == 3) {
+                    addressButton.setText(datas.get(value[0]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getAreaModels().get(value[2]).getName());
+                } else {
+                    addressButton.setText(datas.get(value[0]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getName());
+                }
+
+            }
+        });
+
+
+        addressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickerView.setSelect(i);
+                pickerView.show();
+            }
+        });
     }
 
     private void initJump() {
@@ -57,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.jump2toast).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,ToastActivity.class));
+                startActivity(new Intent(MainActivity.this, ToastActivity.class));
             }
         });
     }
@@ -66,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Item> items = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             Item item = new Item();
-            item.setTitle("第"+(i + 1) +"个item");
+            item.setTitle("第" + (i + 1) + "个item");
 
             items.add(item);
         }
@@ -78,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.addItemList(items, new OnItemClickListener() {
                     @Override
                     public void click(Item item) {
-                        Toast.makeText(MainActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -196,25 +276,21 @@ public class MainActivity extends AppCompatActivity {
                 .isCyclic(true)
                 .build();
 
-//        Dialog mDialog = timer.getDialog();
-//        if (mDialog != null) {
-//
-//            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-//                    ViewGroup.LayoutParams.MATCH_PARENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    Gravity.BOTTOM);
-//
-//            params.leftMargin = 0;
-//            params.rightMargin = 0;
-//            timer.getDialogContainerLayout().setLayoutParams(params);
-//
-//            Window dialogWindow = mDialog.getWindow();
-//            if (dialogWindow != null) {
-//                dialogWindow.setWindowAnimations(R.style.picker_view_slide_anim);//修改动画样式
-//                dialogWindow.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
-//                dialogWindow.setDimAmount(0.3f);
-//            }
-//        }
     }
 
+    private String getCityJson() {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AssetManager assetManager = this.getAssets();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(
+                    assetManager.open("region.json")));
+            String line;
+            while ((line = bf.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
+    }
 }
