@@ -76,6 +76,12 @@
             android:layout_height="wrap_content"
             android:text="Show Toast" />
     </LinearLayout>
+    <Button
+        android:id="@+id/jump2CenterDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show center dialog"
+        />
 
     <Button
         android:id="@+id/showAddressPickerView"

@@ -3,7 +3,9 @@ package com.god2dog.dialoglibrary;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -30,6 +32,17 @@ public class CenterDialog extends Dialog {
 
     private OnDialogClickedListener onDialogListener;
 
+    private String title;
+
+    private String subHead;
+
+    private String content;
+
+    private String cancelText;
+
+    private String confirmText;
+
+
     public void AddOnDialogListener(OnDialogClickedListener onDialogListener) {
         this.onDialogListener = onDialogListener;
     }
@@ -41,7 +54,11 @@ public class CenterDialog extends Dialog {
         if (windowManager != null){
             display = windowManager.getDefaultDisplay();
         }
-
+        Window dialogWindow = getWindow();
+        if (dialogWindow != null){
+            dialogWindow.setGravity(Gravity.CENTER);
+            dialogWindow.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        }
         initDialog();
     }
 
@@ -55,14 +72,82 @@ public class CenterDialog extends Dialog {
             mTitle = findViewById(R.id.tvMainTitle);
             mSubhead = findViewById(R.id.tvSubHead);
             mContent = findViewById(R.id.tvContent);
+
+            mConfirmAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onDialogListener !=null) {
+                        onDialogListener.onConfirmAction(v);
+                    }
+                    dismiss();
+                }
+            });
+
+            mCancelAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onDialogListener !=null) {
+                        onDialogListener.onCancelAction(v);
+                    }
+                    dismiss();
+                }
+            });
         }
 
 
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSubHead(String subHead) {
+        this.subHead = subHead;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCancelText(String cancelText) {
+        this.cancelText = cancelText;
+    }
+
+    public void setConfirmText(String confirmText) {
+        this.confirmText = confirmText;
+    }
+
     @Override
     public void show() {
+        if (title != null){
+            mTitle.setText(title);
+            mTitle.setVisibility(View.VISIBLE);
+        }else {
+            mTitle.setVisibility(View.GONE);
+        }
 
+        if (subHead != null){
+            mSubhead.setText(subHead);
+            mSubhead.setVisibility(View.VISIBLE);
+        }else {
+            mSubhead.setVisibility(View.GONE);
+        }
+
+        if (content != null){
+            mContent.setText(content);
+            mContent.setVisibility(View.VISIBLE);
+        }else {
+            mContent.setVisibility(View.GONE);
+        }
+
+        if (cancelText != null){
+            mCancelAction.setText(cancelText);
+        }
+
+        if (confirmText != null){
+            mConfirmAction.setText(confirmText);
+        }
+        super.show();
     }
 
     public interface OnDialogClickedListener{

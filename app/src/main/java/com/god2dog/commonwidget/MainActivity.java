@@ -140,6 +140,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ToastActivity.class));
             }
         });
+
+        //中间弹窗
+        findViewById(R.id.jump2CenterDialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,DialogActivity.class));
+            }
+        });
     }
 
     private void initBottomListDialog() {
