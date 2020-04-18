@@ -145,6 +145,8 @@ public class WheelViewWidget extends View {
 
     private OnItemSelectedListener onItemSelectedListener;
 
+    private  boolean isOptions = false;
+
 
     public WheelViewWidget(Context context) {
         this(context, null);
@@ -785,6 +787,10 @@ public class WheelViewWidget extends View {
         if (textOffset != 0) {
             mItemTextPaint.setTextScaleX(1.0f);
         }
+    }
+
+    public void setIsOptions(boolean options) {
+        isOptions = options;
     }
 
     public void setLabel(String label) {

@@ -26,6 +26,17 @@ public class WheelOptions {
     private static final int VIEW_COLOR_TITLE = 0xFF000000;
     private static final int VIEW_BG_COLOR_DEFAULT = 0xFFFFFFFF;
 
+    private static final int TYPE_WHEEL_ADDRESS = 0x110;
+    private static final int TYPE_WHEEL_TIME = 0x111;
+
+    public WheelOptions(int type) {
+        if (type == TYPE_WHEEL_ADDRESS){
+            layoutRes = R.layout.selected_view_address;
+        }else if (type == TYPE_WHEEL_TIME){
+            layoutRes = R.layout.selected_view_time;
+        }
+    }
+
     public ViewGroup decorView;
 
     public int outSideColor = -1;

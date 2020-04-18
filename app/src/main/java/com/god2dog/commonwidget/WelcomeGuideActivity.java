@@ -22,5 +22,6 @@ public class WelcomeGuideActivity extends AppCompatActivity {
         GuidePagerAdapter adapter = new GuidePagerAdapter(WelcomeGuideActivity.this,views);
 
         guidePager.setAdapter(adapter);
+
     }
 }
