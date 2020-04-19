@@ -4,21 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.god2dog.addresspickerview.AddressModel;
 import com.god2dog.addresspickerview.AddressPickerView;
+import com.god2dog.basecode.AddressModel;
 import com.god2dog.dialoglibrary.BottomDialog;
 import com.god2dog.dialoglibrary.BottomListDialog;
 import com.god2dog.dialoglibrary.CustomDialog;
 import com.god2dog.dialoglibrary.Item;
 import com.god2dog.dialoglibrary.OnItemClickListener;
+import com.god2dog.wheelwidget.AddressSelectedView;
+import com.god2dog.wheelwidget.builder.AddressSelectedBuilder;
+import com.god2dog.wheelwidget.listener.OnOptionsSelectedListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectChangeListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
 import com.god2dog.wheelwidget.builder.TimeSelectBuilder;
@@ -38,6 +41,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private TimeSelectedView timer;
     private int[] i;
+    private List<AddressModel> datas = new ArrayList<>();
+
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+
+        initJson();
 
         initTimePicker();
 
@@ -65,11 +74,86 @@ public class MainActivity extends AppCompatActivity {
         initJump();
 
         initAddress();
+
+        initAddressStyleTwo();
     }
 
-    private void initAddress() {
-        final List<AddressModel> datas = new ArrayList<>();
-        final Button addressButton = findViewById(R.id.showAddressPickerView);
+    private void initAddressStyleTwo() {
+        Button addressStyleTwoButton =findViewById(R.id.showAddressSelectedView);
+
+        formatAddressData( datas);
+
+        final AddressSelectedView aSelectedView = new AddressSelectedBuilder(this, new OnOptionsSelectedListener() {
+            @Override
+            public void onSelectedItem(int options1, int options2, int options3) {
+                //返回的分别是三个级别的选中位置
+                String opt1tx = datas.size() > 0 ?
+                        datas.get(options1).getName() : "";
+
+                String opt2tx = options2Items.size() > 0
+                        && options2Items.get(options1).size() > 0 ?
+                        options2Items.get(options1).get(options2) : "";
+
+                String opt3tx = options2Items.size() > 0
+                        && options3Items.get(options1).size() > 0
+                        && options3Items.get(options1).get(options2).size() > 0 ?
+                        options3Items.get(options1).get(options2).get(options3) : "";
+
+                String tx = opt1tx + opt2tx + opt3tx;
+                Toast.makeText(MainActivity.this, tx, Toast.LENGTH_SHORT).show();
+            }
+        })
+                .setTitleText("地址选择")
+                .setDividerColor(Color.BLACK)
+                .build();
+        aSelectedView.setData(datas,options2Items,options3Items);
+
+        addressStyleTwoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aSelectedView.show();
+            }
+        });
+
+    }
+
+    private void formatAddressData(List<AddressModel> datas) {
+        if (datas == null) return;
+
+        for (int i = 0; i < datas.size(); i++) {//遍历省份
+            ArrayList<String> cityList = new ArrayList<>();//该省的城市列表（第二级）
+            ArrayList<ArrayList<String>> province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+            for (int c = 0; c < datas.get(i).getCityModels().size(); c++) {//遍历该省份的所有城市
+                String cityName = datas.get(i).getCityModels().get(c).getName();
+                cityList.add(cityName);//添加城市
+                ArrayList<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
+
+                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                if (datas.get(i).getCityModels().get(c).getAreaModels() == null
+                        || datas.get(i).getCityModels().get(c).getAreaModels().size() == 0) {
+                    city_AreaList.add("");
+                } else {
+                    for (AddressModel.CityModel.AreaModel model : datas.get(i).getCityModels().get(c).getAreaModels()) {
+                        city_AreaList.add(model.getName());
+                    }
+                }
+//                cModel.setAreaModels();
+                province_AreaList.add(city_AreaList);//添加该省所有地区数据
+            }
+            /**
+             * 添加城市数据
+             */
+            options2Items.add(cityList);
+
+            /**
+             * 添加地区数据
+             */
+            options3Items.add(province_AreaList);
+        }
+
+    }
+
+    private void initJson() {
         String json = getCityJson();
         try {
             JSONArray a1 = new JSONArray(json);
@@ -108,6 +192,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initAddress() {
+        final Button addressButton = findViewById(R.id.showAddressPickerView);
+
         final AddressPickerView pickerView = new AddressPickerView(MainActivity.this, datas);
         pickerView.setAddressPickerViewCallbackk(new AddressPickerView.AddressPickerViewCallback() {
             @Override

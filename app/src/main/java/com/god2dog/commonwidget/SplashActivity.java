@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         }else {
             //跳转到主页
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
         }
     }
 }

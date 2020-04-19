@@ -1,11 +1,14 @@
 package com.god2dog.wheelwidget;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.god2dog.wheelwidget.listener.CustomListener;
+import com.god2dog.wheelwidget.listener.OnOptionsSelectChangedListener;
+import com.god2dog.wheelwidget.listener.OnOptionsSelectedListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectChangeListener;
 import com.god2dog.wheelwidget.listener.OnTimeSelectListener;
 
@@ -26,8 +29,8 @@ public class WheelOptions {
     private static final int VIEW_COLOR_TITLE = 0xFF000000;
     private static final int VIEW_BG_COLOR_DEFAULT = 0xFFFFFFFF;
 
-    private static final int TYPE_WHEEL_ADDRESS = 0x110;
-    private static final int TYPE_WHEEL_TIME = 0x111;
+    public static final int TYPE_WHEEL_ADDRESS = 0x110;
+    public static final int TYPE_WHEEL_TIME = 0x111;
 
     public WheelOptions(int type) {
         if (type == TYPE_WHEEL_ADDRESS){
@@ -65,6 +68,15 @@ public class WheelOptions {
     public OnTimeSelectListener timeSelectListener;
     public OnTimeSelectChangeListener timeSelectChangeListener;
     public View.OnClickListener cancelListener;
+
+    public OnOptionsSelectedListener onOptionsSelectedListener;
+    public OnOptionsSelectChangedListener onOptionsSelectedChangeListener;
+    public boolean isRestore;
+    public int selectedIndex1,selectedIndex2,selectedIndex3;
+    public String label1, label2, label3;
+    public boolean isLoop1, isLoop2, isLoop3;
+    public Typeface typeface = Typeface.MONOSPACE;//字体样式;
+    public int x_offset_one,x_offset_two,x_offset_three;
 
     public int textGravity = Gravity.CENTER;
     public int textContentSize;

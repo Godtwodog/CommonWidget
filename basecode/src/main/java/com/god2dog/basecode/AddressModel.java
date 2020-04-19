@@ -1,4 +1,6 @@
-package com.god2dog.addresspickerview;
+package com.god2dog.basecode;
+
+import com.god2dog.basecode.interfaces.ISelectedViewData;
 
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  * 创建日期：2020/4/16
  * 描述：CommonWidget
  */
-public class AddressModel {
+public class AddressModel implements ISelectedViewData {
     private String name;
     private int id;
     private String value;
@@ -53,6 +55,11 @@ public class AddressModel {
 
     public void setCityModels(List<CityModel> cityModels) {
         this.cityModels = cityModels;
+    }
+
+    @Override
+    public String getSelectedViewText() {
+        return name;
     }
 
     public static class CityModel{

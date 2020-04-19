@@ -24,7 +24,7 @@ public class TimeSelectBuilder {
     private WheelOptions mWheelOptions;
 
     public TimeSelectBuilder (Context context, OnTimeSelectListener onTimeSelectListener){
-        mWheelOptions = new WheelOptions();
+        mWheelOptions = new WheelOptions(WheelOptions.TYPE_WHEEL_TIME);
         mWheelOptions.context = context;
         mWheelOptions.timeSelectListener = onTimeSelectListener;
     }

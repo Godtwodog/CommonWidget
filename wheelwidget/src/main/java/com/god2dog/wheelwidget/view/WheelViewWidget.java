@@ -18,6 +18,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.god2dog.basecode.interfaces.ISelectedViewData;
 import com.god2dog.wheelwidget.timer.InertiaTimerTask;
 import com.god2dog.wheelwidget.MessageHandler;
 import com.god2dog.wheelwidget.listener.OnItemSelectedListener;
@@ -616,7 +617,9 @@ public class WheelViewWidget extends View {
             return "";
         } else if (item instanceof Integer) {
             return getNumberFormat((int) item);
-        } else {
+        } else if (item instanceof ISelectedViewData){
+            return ((ISelectedViewData) item).getSelectedViewText();
+        }else {
             return "";
         }
     }

@@ -89,4 +89,11 @@
         android:layout_height="wrap_content"
         android:text="show address picker view"
         />
+
+    <Button
+        android:id="@+id/showAddressSelectedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show address selected view"
+        />
 </LinearLayout>
