@@ -8,12 +8,30 @@
     <include
         layout="@layout/list_dialog_topbar"
         android:layout_width="match_parent"
-        android:layout_height="45dp" />
+        android:layout_height="50dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFEEEEEE"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/containerRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="取消"
+        android:textColor="#ff333333"
+        android:textSize="16sp"
+        />
 
 </LinearLayout>

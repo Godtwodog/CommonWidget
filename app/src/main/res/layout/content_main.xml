@@ -6,7 +6,7 @@
 
     <Button
         android:id="@+id/btnShowDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="show dialog!" />
@@ -74,26 +74,44 @@
             android:id="@+id/jump2toast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show Toast" />
+            android:text="消息提示" />
     </LinearLayout>
     <Button
         android:id="@+id/jump2CenterDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="show center dialog"
+        android:text="中间消息弹框"
         />
 
     <Button
         android:id="@+id/showAddressPickerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="show address picker view"
+        android:text="京东样式地址选择器"
         />
 
     <Button
         android:id="@+id/showAddressSelectedView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="show address selected view"
+        android:text="滚轮样式地址选择器"
+        />
+    <Button
+        android:id="@+id/jump2CalendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日历选择器"
+        />
+    <Button
+        android:id="@+id/jump2ImageSelector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="照片选择器"
+        />
+    <Button
+        android:id="@+id/jump2BannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="轮播控件"
         />
 </LinearLayout>

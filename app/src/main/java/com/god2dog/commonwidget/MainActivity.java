@@ -237,6 +237,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,DialogActivity.class));
             }
         });
+
+        //日历控件
+        findViewById(R.id.jump2CalendarView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CalendarViewActivity.class));
+            }
+        });
+
+        //照片选择控件
+        findViewById(R.id.jump2ImageSelector).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ImageSelectorActivity.class));
+            }
+        });
+
+        //轮播控件
+        findViewById(R.id.jump2BannerView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,BannerViewActivity.class));
+            }
+        });
     }
 
     private void initBottomListDialog() {
@@ -258,7 +282,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                     }
                 });
-
+                dialog.setTitle("我是标题");
+                dialog.setCancelStyle(BottomListDialog.CANCEL.BOTTOM);
                 dialog.show();
             }
         });

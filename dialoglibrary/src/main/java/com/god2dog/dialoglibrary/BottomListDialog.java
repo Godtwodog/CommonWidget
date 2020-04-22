@@ -4,8 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,7 +25,17 @@ public class BottomListDialog extends Dialog {
     private RecyclerView recyclerView;
     private RelativeLayout mTopBar;
     private TextView mTitle;
+    private Button btnCancel;
+    private ImageView ivCancel;
     private BottomListAdapter mAdapter;
+
+    private String title;
+
+    private CANCEL cancelStyle = CANCEL.OTHER;
+
+   public enum CANCEL{
+        TOP,BOTTOM,OTHER
+    }
 
     public BottomListDialog(@NonNull Context context) {
         super(context, R.style.BottomListDialog);
@@ -43,6 +56,24 @@ public class BottomListDialog extends Dialog {
         recyclerView = findViewById(R.id.containerRecycler);
         mTopBar = findViewById(R.id.rlTopBar);
         mTitle = findViewById(R.id.tvTitle);
+        btnCancel = findViewById(R.id.btn_cancel);
+        ivCancel =findViewById(R.id.iv_top_close);
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+    }
+
+    public void setTitle(String title) {
+        this.title =title;
+        mTitle.setText(title);
+    }
+
+    public void setCancelStyle(CANCEL cancelStyle) {
+        this.cancelStyle = cancelStyle;
     }
 
     public List<Item> getItemList() {
@@ -54,6 +85,7 @@ public class BottomListDialog extends Dialog {
         if (itemList == null || itemList.size() <= 0) {
             return;
         }
+        this.itemList = itemList;
         int size = itemList.size();
         if (size >= mShowMaxNumber) {
             ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
@@ -72,4 +104,18 @@ public class BottomListDialog extends Dialog {
 
     }
 
+    @Override
+    public void show() {
+        if (cancelStyle == CANCEL.OTHER){
+            ivCancel.setVisibility(View.GONE);
+            btnCancel.setVisibility(View.GONE);
+        }else if (cancelStyle == CANCEL.BOTTOM){
+            ivCancel.setVisibility(View.GONE);
+            btnCancel.setVisibility(View.VISIBLE);
+        }else if (cancelStyle == CANCEL.TOP){
+            ivCancel.setVisibility(View.VISIBLE);
+            ivCancel.setVisibility(View.GONE);
+        }
+        super.show();
+    }
 }

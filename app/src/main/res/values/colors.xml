@@ -6,4 +6,5 @@
 
     <color name="baseUserTabBackgroundColor">@android:color/white</color>
     <color name="default_title_color">#FF333333</color>
+    <color name="main_color">#5CB85C</color>
 </resources>
