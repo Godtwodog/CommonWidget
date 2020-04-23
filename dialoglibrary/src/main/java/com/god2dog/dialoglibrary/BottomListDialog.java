@@ -81,7 +81,7 @@ public class BottomListDialog extends Dialog {
     }
 
 
-    public void addItemList(List<Item> itemList,OnItemClickListener onItemClickListener) {
+    public void addItemList(List<Item> itemList, final OnItemClickListener onItemClickListener) {
         if (itemList == null || itemList.size() <= 0) {
             return;
         }
@@ -96,7 +96,13 @@ public class BottomListDialog extends Dialog {
 
         }
         mAdapter = new BottomListAdapter(itemList);
-        mAdapter.setOnItemClickListener(onItemClickListener);
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void click(Item item) {
+                onItemClickListener.click(item);
+                dismiss();
+            }
+        });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);

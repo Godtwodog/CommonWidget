@@ -4,17 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".WelcomeGuideActivity">
+
+    <Button
+        android:id="@+id/btnJump"
+        android:layout_width="@dimen/x110"
+        android:layout_height="@dimen/y50"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y60"
+        android:background="@drawable/bg_guide_jump"
+        android:text="跳过"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpagerGuide"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <Button
+        android:id="@+id/btnJump2Home"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y80"
+        android:text="我是文案"
+        android:layout_above="@+id/llIndicator"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y40"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:paddingLeft="@dimen/x80"
+        android:paddingRight="@dimen/x80"
+        android:background="@drawable/bg_guide_button_blue"
+        android:visibility="gone"
+        />
 
     <LinearLayout
+        android:id="@+id/llIndicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y60"
+        >
 
     </LinearLayout>
 </RelativeLayout>

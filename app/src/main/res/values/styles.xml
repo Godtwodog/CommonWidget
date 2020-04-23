@@ -16,6 +16,7 @@
         <item name="android:paddingRight">@dimen/baseUserTabPadding</item>
         <item name="android:layout_marginTop">@dimen/baseUserTabTopMargin</item>
     </style>
+
     <style name="BaseUserTabMultiLineStyle">
         <item name="android:background">@color/baseUserTabBackgroundColor</item>
         <item name="android:layout_width">match_parent</item>
@@ -42,6 +43,11 @@
 
     <style name="DXSFullScreen" parent="Theme.Design.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ToolBarTheme" parent="Widget.AppCompat.Toolbar">
+
     </style>
 
 </resources>

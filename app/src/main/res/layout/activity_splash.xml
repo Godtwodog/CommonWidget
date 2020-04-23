@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/rlAdvertising"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.85"
+        android:visibility="invisible"
+        >
+        <ImageView
+            android:id="@+id/iv_advertising"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_ad"
+            android:scaleType="fitXY"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_corner_5"
+            android:text="广告"
+            android:textColor="#ffffffff"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_seconds"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="跳过\n5s"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_gray_circle"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:textSize="12sp"
+            />
+
+        <RelativeLayout
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#50000000"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            >
+            <TextView
+                android:id="@+id/tvAdTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="我是标题标题"
+                android:textColor="#ffffffff"
+                android:background="@android:color/transparent"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                tools:text="@string/left_title" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/ic_arrow_white" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这里是logo位置"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+</LinearLayout>

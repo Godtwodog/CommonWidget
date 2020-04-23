@@ -35,8 +35,5 @@
         android:id="@+id/action_content_add"
         android:icon="@mipmap/ic_action_content_add"
         android:title="@string/add_item" />
-    <item
-        android:id="@+id/ic_github"
-        android:icon="@mipmap/ic_github"
-        android:title="@string/source_on_github" />
+
 </menu>

@@ -8,4 +8,5 @@ package com.god2dog.commonwidget;
  */
 public class AppConfig {
     public static final String IS_FIRST_START_APP = "isFirstStartApp";
+    public static final String CACHE_TOKEN = "token";
 }
