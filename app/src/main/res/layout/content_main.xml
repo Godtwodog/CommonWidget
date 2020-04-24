@@ -8,8 +8,15 @@
         android:id="@+id/btnShowDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_centerInParent="true"
         android:text="show dialog!" />
+    <Button
+        android:id="@+id/showTimePickerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时间滚轮弹框"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,2 +1,2 @@
-include ':app', ':wheelwidget', ':dialoglibrary', ':addresspickerview', ':basecode', ':banner', ':calendarview', ':imageselector'
+include ':app', ':wheelwidget', ':dialoglibrary', ':addresspickerview', ':basecode', ':banner', ':calendarview', ':imageselector', ':pickerview', ':wheelview'
 rootProject.name='CommonWidget'
