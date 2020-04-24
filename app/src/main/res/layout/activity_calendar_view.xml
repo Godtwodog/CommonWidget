@@ -11,16 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:colorCurrentDay="@color/colorAccent"
-        app:colorSelectedDayBackground="@color/colorAccent"
-        app:colorSelectedDayText="@color/selected_day_text"
-        app:colorPreviousDayText="#727272"
+        app:colorSelectedDayBackground="@color/colorBlue"
+        app:colorPreviousDayText="#FFFFFF"
         app:colorNormalDayText="#727272"
         app:colorYearMonthText="#727272"
         app:colorWeekText="#727272"
-        app:colorBusyDaysBg="#727272"
-        app:colorInValidDaysBg="#727272"
-        app:colorBusyDaysText="#FFFFFF"
         app:colorInValidDaysText="#FFFFFF"
+
 
         app:textSizeDay="14sp"
         app:textSizeTag="12sp"
@@ -29,7 +26,7 @@
         app:headerMonthHeight="50dp"
         app:selectedDayRadius="20dp"
         app:calendarHeight="320dp"
-        app:enablePreviousDay="false"
+        app:enablePreviousDay="true"
         />
 
 </RelativeLayout>

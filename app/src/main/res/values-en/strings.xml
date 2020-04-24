@@ -30,4 +30,6 @@
     <string name="right_content">我是内容</string>
     <string name="left_subhead">我是副标题</string>
     <string name="right_content_message">我是内容说明</string>
+    <string name="title">我是标题</string>
+    <string name="option">选项</string>
 </resources>

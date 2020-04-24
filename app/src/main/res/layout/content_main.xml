@@ -114,4 +114,16 @@
         android:layout_height="wrap_content"
         android:text="轮播控件"
         />
+    <Button
+        android:id="@+id/jump2UserCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用户中心常用样式"
+        />
+    <Button
+        android:id="@+id/jump2Tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tab选项卡"
+        />
 </LinearLayout>

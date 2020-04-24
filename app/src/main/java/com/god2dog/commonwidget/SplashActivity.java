@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     private boolean isFirstStartApp = false;
     private SharedPreferences.Editor editor;
     //登录token
-    private String token = "123";
+    private String token = "";
     private RelativeLayout mAdvertisingLayout;
 
     private Handler handler = new Handler(){
@@ -57,7 +57,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
-        SharedPreferences preferences = getPreferences(Activity.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(AppConfig.PREFERENCES_KEY,Activity.MODE_PRIVATE);
         editor = preferences.edit();
         isFirstStartApp = preferences.getBoolean(AppConfig.IS_FIRST_START_APP, true);
         token = preferences.getString(AppConfig.CACHE_TOKEN,"");

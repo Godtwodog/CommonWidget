@@ -24,7 +24,7 @@ public class WebViewActivity extends AppCompatActivity {
     private String from;
     private String action;
     private long djtime[] = new long[2];
-    private SharedPreferences preferences;;
+    private SharedPreferences preferences;
 
 
 
@@ -36,7 +36,7 @@ public class WebViewActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        preferences = getPreferences(Activity.MODE_PRIVATE);
+        preferences = getSharedPreferences(AppConfig.PREFERENCES_KEY,Activity.MODE_PRIVATE);
 
         if (getIntent() != null && !"".equals(getIntent().getAction())) {
             title = getIntent().getStringExtra("title");

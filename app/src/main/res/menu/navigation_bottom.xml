@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/options1"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/option" />
+    <item
+        android:id="@+id/options2"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/option" />
+    <item
+        android:id="@+id/options3"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/option" />
+</menu>

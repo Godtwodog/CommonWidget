@@ -16,7 +16,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 style="@style/BaseUserTabRightArrowStyle"
@@ -27,7 +27,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 android:id="@+id/iv_arrow_flag"
@@ -41,14 +41,14 @@
                 android:gravity="center_vertical"
                 android:textColor="#ff666666"
                 android:textSize="12sp"
-                tools:text="@string/right_message" />
+                android:text="@string/right_message" />
         </RelativeLayout>
 
         <RelativeLayout style="@style/BaseUserTabStyle">
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 android:id="@+id/iv_delete"
@@ -111,7 +111,7 @@
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
                 android:layout_toRightOf="@+id/iv_left_setting"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 style="@style/BaseUserTabRightArrowStyle"
@@ -127,7 +127,7 @@
                 android:layout_marginTop="15dp"
                 android:textColor="#FF333333"
                 android:textSize="16sp"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 android:id="@+id/iv_multi_line_arrow"
@@ -161,7 +161,7 @@
                 android:gravity="center_vertical"
                 android:textColor="#ff333333"
                 android:textSize="14sp"
-                tools:text="@string/right_content" />
+                android:text="@string/right_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -190,7 +190,7 @@
                 android:layout_toRightOf="@+id/iv_style_1"
                 android:textColor="#FF333333"
                 android:textSize="16sp"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                 android:layout_marginTop="15dp"
                 android:textColor="#FF333333"
                 android:textSize="16sp"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
 
             <TextView
                 style="@style/BaseUserTabLeftTitleStyle"
-                tools:text="@string/left_title" />
+                android:text="@string/left_title" />
 
             <ImageView
                 android:id="@+id/iv_arrow_3"

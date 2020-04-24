@@ -24,27 +24,12 @@ public class CalendarViewActivity extends AppCompatActivity {
         dayPickerView =findViewById(R.id.dayPickerView);
 
         DayPickerView.DataModel dataModel = new DayPickerView.DataModel();
-        dataModel.yearStart = 2020;
-        dataModel.monthStart = 3;
-        dataModel.monthCount = 20;
-//        dataModel.defTag = "";
-        dataModel.leastDaysNum = 2;
+        dataModel.yearStart = 1970;
+        dataModel.monthStart = 1;
+        dataModel.monthCount = 130 * 12;
+        dataModel.leastDaysNum = 1;
         dataModel.mostDaysNum = 100;
 
-//        SimpleMonthAdapter.CalendarDay startDay = new SimpleMonthAdapter.CalendarDay(2016, 6, 5);
-//        SimpleMonthAdapter.CalendarDay endDay = new SimpleMonthAdapter.CalendarDay(2016, 6, 20);
-//        SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays = new SimpleMonthAdapter.SelectedDays<>(startDay, endDay);
-//        dataModel.selectedDays = selectedDays;
-
-//        SimpleMonthAdapter.CalendarDay tag = new SimpleMonthAdapter.CalendarDay(2016, 7, 15);
-//        tag.setTag("标签1");
-//
-//        SimpleMonthAdapter.CalendarDay tag2 = new SimpleMonthAdapter.CalendarDay(2016, 8, 15);
-//        tag2.setTag("标签2");
-//        List<SimpleMonthAdapter.CalendarDay> tags = new ArrayList<>();
-//        tags.add(tag);
-//        tags.add(tag2);
-//        dataModel.tags = tags;
 
         dayPickerView.setParameter(dataModel, new DatePickerController() {
             @Override

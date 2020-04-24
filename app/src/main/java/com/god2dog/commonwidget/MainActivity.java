@@ -261,6 +261,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,BannerViewActivity.class));
             }
         });
+        //用户中心
+        findViewById(R.id.jump2UserCenter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,UserActivity.class));
+            }
+        });
+        //tab
+        findViewById(R.id.jump2Tab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,TabActivity.class));
+            }
+        });
     }
 
     private void initBottomListDialog() {

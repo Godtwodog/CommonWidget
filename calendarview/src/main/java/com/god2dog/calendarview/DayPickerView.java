@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DayPickerView extends RecyclerView {
@@ -87,14 +89,17 @@ public class DayPickerView extends RecyclerView {
         this.mController = mController;
         setUpAdapter();
 
-        scrollToSelectedPosition(dataModel.selectedDays, dataModel.monthStart);
+        scrollToCurrentPosition();
+
     }
 
-    private void scrollToSelectedPosition(SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays, int monthStart) {
-        if(selectedDays != null && selectedDays.getFirst() != null && selectedDays.getFirst().month > monthStart) {
-            int position = selectedDays.getFirst().month - monthStart;
-            scrollToPosition(position);
-        }
+    private void scrollToCurrentPosition() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+
+        int currentPosition = (year - 1970) * 12 + month;
+        scrollToPosition(currentPosition);
     }
 
     public static class DataModel implements Serializable {
@@ -105,12 +110,9 @@ public class DayPickerView extends RecyclerView {
         public int yearStart;                                      // 日历开始的年份
         public int monthStart;                                     // 日历开始的月份
         public int monthCount;                                     // 要显示几个月
-        public List<SimpleMonthAdapter.CalendarDay> invalidDays;   // 无效的日期
-        public List<SimpleMonthAdapter.CalendarDay> busyDays;      // 被占用的日期
         public SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays;  // 默认选择的日期
         public int leastDaysNum;                                   // 至少选择几天
         public int mostDaysNum;                                    // 最多选择几天
-        public List<SimpleMonthAdapter.CalendarDay> tags;          // 日期下面对应的标签
 //        public String defTag;                                      // 默认显示的标签
 //        public boolean displayTag;                               // 是否显示标签
     }

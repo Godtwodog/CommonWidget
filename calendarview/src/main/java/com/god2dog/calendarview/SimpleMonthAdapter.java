@@ -26,16 +26,10 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     private Calendar calendar;
     private SelectedDays<CalendarDay> rangeDays;                // 选择日期范围
 
-    private List<CalendarDay> mBusyDays;                        // 被占用的日期
-//    private List<CalendarDay> mTags;                            // 日期下面的标签
-//    private String mDefTag;                                     // 默认标签
 
     private int mLeastDaysNum;                                  // 至少选择几天
     private int mMostDaysNum;                                   // 至多选择几天
 
-    private List<CalendarDay> mInvalidDays;                     // 无效的日期
-
-    private CalendarDay mNearestDay;                            // 比离入住日期大且是最近的已被占用或者无效日期
 
     private DayPickerView.DataModel dataModel;
 
@@ -45,9 +39,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         mController = datePickerController;
         this.dataModel = dataModel;
 
-//        // 今天是否默认选中
-//        if (typedArray.getBoolean(R.styleable.DayPickerView_currentDaySelected, false))
-//            onDayTapped(new CalendarDay(System.currentTimeMillis()));
         initData();
     }
 
@@ -56,18 +47,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
      */
     private void initData() {
         calendar = Calendar.getInstance();
-
-        if (dataModel.invalidDays == null) {
-            dataModel.invalidDays = new ArrayList<>();
-        }
-
-        if (dataModel.busyDays == null) {
-            dataModel.busyDays = new ArrayList<>();
-        }
-
-        if (dataModel.tags == null) {
-            dataModel.tags = new ArrayList<>();
-        }
 
         if (dataModel.selectedDays == null) {
             dataModel.selectedDays = new SelectedDays<>();
@@ -97,18 +76,11 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
             dataModel.monthCount = 12;
         }
 
-//        if(dataModel.defTag == null) {
-//            dataModel.defTag = "标签";
-//        }
 
         mLeastDaysNum = dataModel.leastDaysNum;
         mMostDaysNum = dataModel.mostDaysNum;
 
-        mBusyDays = dataModel.busyDays;
-        mInvalidDays = dataModel.invalidDays;
         rangeDays = dataModel.selectedDays;
-//        mTags = dataModel.tags;
-//        mDefTag = dataModel.defTag;
     }
 
     @Override
@@ -134,7 +106,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
 
         drawingParams.put(SimpleMonthView.VIEW_PARAMS_SELECTED_BEGIN_DATE, rangeDays.getFirst());
         drawingParams.put(SimpleMonthView.VIEW_PARAMS_SELECTED_LAST_DATE, rangeDays.getLast());
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_NEAREST_DATE, mNearestDay);
         drawingParams.put(SimpleMonthView.VIEW_PARAMS_YEAR, year);
         drawingParams.put(SimpleMonthView.VIEW_PARAMS_MONTH, month);
         drawingParams.put(SimpleMonthView.VIEW_PARAMS_WEEK_START, calendar.getFirstDayOfWeek());
@@ -191,28 +162,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         // 选择退房日期
         if (rangeDays.getFirst() != null && rangeDays.getLast() == null) {
             // 把比离入住日期大且是最近的已被占用或者无效日期找出来
-            mNearestDay = getNearestDay(rangeDays.getFirst());
-            // 所选日期范围内是否有被占用的日期
-            if (isContainSpecialDays(rangeDays.getFirst(), calendarDay, mBusyDays)) {
-                if(mController != null) {
-                    mController.alertSelectedFail(DatePickerController.FailEven.CONTAIN_NO_SELECTED);
-                }
-                return;
-            }
-            // 所选日期范围内是否有无效的日期
-            if (isContainSpecialDays(rangeDays.getFirst(), calendarDay, mInvalidDays)) {
-                if(mController != null) {
-                    mController.alertSelectedFail(DatePickerController.FailEven.CONTAIN_INVALID);
-                }
-                return;
-            }
-            // 所选退房日期不能再入住日期之前
-            if (calendarDay.getDate().before(rangeDays.getFirst().getDate())) {
-                if(mController != null) {
-                    mController.alertSelectedFail(DatePickerController.FailEven.END_MT_START);
-                }
-                return;
-            }
 
             int dayDiff = dateDiff(rangeDays.getFirst(), calendarDay);
             // 所选的日期范围不能小于最小限制
@@ -240,11 +189,11 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
             rangeDays.setFirst(calendarDay);
             rangeDays.setLast(null);
             // 离该天最近的已定或者禁用日期找出来
-            mNearestDay = getNearestDay(calendarDay);
+//            mNearestDay = getNearestDay(calendarDay);
         } else {        // 第一次选择入住日期
             rangeDays.setFirst(calendarDay);
             // 离该天最近的已定或者禁用日期找出来
-            mNearestDay = getNearestDay(calendarDay);
+//            mNearestDay = getNearestDay(calendarDay);
         }
 
         notifyDataSetChanged();
@@ -258,8 +207,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
      */
     protected CalendarDay getNearestDay(CalendarDay calendarDay) {
         List<CalendarDay> list = new ArrayList<>();
-        list.addAll(mBusyDays);
-        list.addAll(mInvalidDays);
         Collections.sort(list);
         for (CalendarDay day : list) {
             if (calendarDay.compareTo(day) < 0) {
@@ -317,22 +264,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         int diffDays = dateDiff(firstDay, lastDay);
         Calendar tempCalendar = Calendar.getInstance();
         tempCalendar.setTime(firstDay.getDate());
-//        for (int i = 1; i < diffDays; i++) {
-//            tempCalendar.set(Calendar.DATE, tempCalendar.get(Calendar.DATE) + 1);
-//            CalendarDay calendarDay = new CalendarDay(tempCalendar);
-//            boolean isTag = false;
-////            for (CalendarDay calendarTag : mTags) {
-////                if (calendarDay.compareTo(calendarTag) == 0) {
-////                    isTag = true;
-////                    rangeDays.add(calendarTag);
-////                    break;
-////                }
-////            }
-////            if (!isTag) {
-////                calendarDay.tag = mDefTag;
-////                rangeDays.add(calendarDay);
-////            }
-//        }
         return rangeDays;
     }
 
