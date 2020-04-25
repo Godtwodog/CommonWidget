@@ -36,6 +36,8 @@ import java.util.List;
  * 仿京东地址选择控件
  */
 public class AddressPickerView {
+    public static final int ADAPTER_IMAGE_STYLE = 2;
+
     private Context context;
 
     private Dialog mDialog;
@@ -346,7 +348,7 @@ public class AddressPickerView {
         void callback(int... value);
     }
 
-    public void setAddressPickerViewCallbackk(AddressPickerViewCallback addressPickerViewCallback) {
+    public void setAddressPickerViewCallback(AddressPickerViewCallback addressPickerViewCallback) {
         this.addressPickerViewCallback = addressPickerViewCallback;
     }
 

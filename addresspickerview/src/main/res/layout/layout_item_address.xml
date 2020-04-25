@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:paddingLeft="@dimen/x40"
     android:paddingRight="@dimen/x40">
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_blue_right"
         android:layout_centerVertical="true"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginRight="5dp"
         />
 
     <TextView
@@ -23,6 +25,7 @@
         android:textSize="14sp"
         android:layout_toRightOf="@+id/ivLeftImage"
         android:gravity="center_vertical"
+        tools:text="北京市"
         />
     <ImageView
         android:id="@+id/ivRightImage"

@@ -34,7 +34,7 @@ public class CityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public CityAdapter(List<AddressModel.CityModel> datas, Context context) {
-        this(datas,context,2);
+        this(datas,context,AddressPickerView.ADAPTER_IMAGE_STYLE);
     }
 
     public CityAdapter(List<AddressModel.CityModel> datas, Context context, int imageStyle) {

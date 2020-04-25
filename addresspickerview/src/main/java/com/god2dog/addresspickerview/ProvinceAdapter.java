@@ -34,7 +34,7 @@ public class ProvinceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public ProvinceAdapter(List<AddressModel> datas, Context context) {
-        this(datas,context,2);
+        this(datas,context,AddressPickerView.ADAPTER_IMAGE_STYLE);
     }
 
     public ProvinceAdapter(List<AddressModel> datas, Context context, int imageStyle) {

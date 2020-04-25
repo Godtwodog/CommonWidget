@@ -23,8 +23,6 @@ import java.util.List;
 /**
  * 解析省市区数据示例
  *
- * @author 小嵩
- * @date 2017-3-16
  */
 public class JsonDataActivity extends AppCompatActivity implements View.OnClickListener {
 

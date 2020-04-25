@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.god2dog.commonwidget.adapter.ImageAdapter;
 import com.god2dog.imageselector.utils.ImageSelector;
@@ -80,6 +81,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements View.OnC
                 ImageSelector.preload(this);
             } else {
                 //拒绝权限。
+                Toast.makeText(this, "您拒绝了权限，想要再次使用时，请到设置-应用中开启权限", Toast.LENGTH_SHORT).show();
             }
         }
     }

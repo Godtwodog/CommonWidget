@@ -56,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
         initJson();
 
         initTimePicker();
@@ -205,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         final Button addressButton = findViewById(R.id.showAddressPickerView);
 
         final AddressPickerView pickerView = new AddressPickerView(MainActivity.this, datas);
-        pickerView.setAddressPickerViewCallbackk(new AddressPickerView.AddressPickerViewCallback() {
+        pickerView.setAddressPickerViewCallback(new AddressPickerView.AddressPickerViewCallback() {
             @Override
             public void callback(int... value) {
                 i = value;

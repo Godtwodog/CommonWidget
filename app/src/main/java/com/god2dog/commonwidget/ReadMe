@@ -1,4 +1,214 @@
 相关控件使用说明
-1、中间弹框
+代码可读性
+易用性
+低耦合性
+稳定
+可扩展
 
+1、时间滚轮弹框
+ 使用默认样式
+  timer = new TimeSelectBuilder(this, new com.god2dog.wheelwidget.listener.OnTimeSelectListener() {
+                @Override
+                public void onTimeSelected(Date date, View view) {
+                }
+            })
+                    .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
+                        @Override
+                        public void onTimeSelectChange(Date date) {
+                        }
+                    })
+   修改自定义样式
+    timer = new TimeSelectBuilder(this, new com.god2dog.wheelwidget.listener.OnTimeSelectListener() {
+               @Override
+               public void onTimeSelected(Date date, View view) {
+               }
+           })
+                   .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
+                       @Override
+                       public void onTimeSelectChange(Date date) {
+                       }
+                   })
+                   //设置类型，长度为6的数组，分别代表年月日时分秒
+                   .setType(new boolean[]{true, true, true, true, true, true})
+                   //是否为弹窗样式，默认设置false ，内部实现将DecorView 作为它的父控件。
+                   .isDialog(true)
+                   .addOnCancelClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+                           Log.i("pvTime", "onCancelClickListener");
+                       }
+                   })
+                   //若设置偶数，实际值会加1（比如设置6，则最大可见条目为7）
+                   .setItemVisibleCount(9)
+                   //设置行间隔 1.2f - 6.0f
+                   .setLineSpacingMultiplier(1.8f)
+                   //设置是否为中间标签，若为true,则只显示中间，反之每个都有
+                   .isCenterLabel(false)
+                   //是否渐变
+                   .isAlphaGradient(true)
+                   //文字位置
+                   .setGravity(Gravity.CENTER)
+                   //文字大小
+                   .setContentTextSize(20)
+                   //是否可以无限滑动
+                   .isCyclic(true)
+                   .build();
+2、底部分享弹框
+     new BottomDialog(MainActivity.this)
+     //设置标题内容
+                            .title(R.string.title_item)
+                            //设置布局样式，不设置则为列表样式， CustomDialog.GRID 网格样式
+                            .layout(CustomDialog.GRID)
+                            //设置方向 VERTICAL竖直列表  HORIZONTAL横向列表
+                            .orientation(CustomDialog.VERTICAL)
+                            .inflateMenu(R.menu.menu_grid, new OnItemClickListener() {
+                                @Override
+                                public void click(Item item) {
+                                    Toast.makeText(MainActivity.this, getString(R.string.share_title) + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .show();
+3、底部列表弹框
+    添加数据类型为Item的集合，若集合size()大于7，则中间固定，可以滚动，反之则适应内容大小
+  BottomListDialog dialog = new BottomListDialog(MainActivity.this);
+                dialog.addItemList(items, new OnItemClickListener() {
+                    @Override
+                    public void click(Item item) {
+                        Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                //设置标题
+                dialog.setTitle("我是标题");
+                //设置 取消 的样式，BOTTOM 在下边，TOP 在上边 ，OTHER,不显示
+                dialog.setCancelStyle(BottomListDialog.CANCEL.BOTTOM);
+                dialog.show();
+ 4、中间内容弹框
+    内容添加则显示，不添加则隐藏
+  CenterDialog dialog = new CenterDialog(DialogActivity.this,1);
+                 dialog.setTitle("我是标题");
+                 dialog.setSubHead("我是副标题");
+                 dialog.setContent("我是文本内容");
+                 dialog.AddOnDialogListener(new CenterDialog.OnDialogClickedListener() {
+                     @Override
+                     public void onCancelAction(View view) {
+                         ToastUtils.showToast("点击取消",DialogActivity.this);
+                     }
 
+                     @Override
+                     public void onConfirmAction(View view) {
+                         ToastUtils.showToast("点击确认",DialogActivity.this);
+                     }
+                 });
+                 dialog.show();
+  5、京东样式地址选择器
+    需要解析数据
+    final Button addressButton = findViewById(R.id.showAddressPickerView);
+
+          final AddressPickerView pickerView = new AddressPickerView(MainActivity.this, datas);
+
+          pickerView.setAddressPickerViewCallback(new AddressPickerView.AddressPickerViewCallback() {
+              @Override
+              public void callback(int... value) {
+                  i = value;
+                  if (value.length == 3) {
+                      addressButton.setText(datas.get(value[0]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getAreaModels().get(value[2]).getName());
+                  } else {
+                      addressButton.setText(datas.get(value[0]).getName() + "-" + datas.get(value[0]).getCityModels().get(value[1]).getName());
+                  }
+
+              }
+          });
+          addressButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  pickerView.setSelect(i);
+                  pickerView.show();
+              }
+          });
+6、地址滚轮选择器
+    //先要解析 地址数据，model需要继承
+  OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String opt1tx = options1Items.size() > 0 ?
+                        options1Items.get(options1).getPickerViewText() : "";
+
+                String opt2tx = options2Items.size() > 0
+                        && options2Items.get(options1).size() > 0 ?
+                        options2Items.get(options1).get(options2) : "";
+
+                String opt3tx = options2Items.size() > 0
+                        && options3Items.get(options1).size() > 0
+                        && options3Items.get(options1).get(options2).size() > 0 ?
+                        options3Items.get(options1).get(options2).get(options3) : "";
+
+                String tx = opt1tx + opt2tx + opt3tx;
+                Toast.makeText(JsonDataActivity.this, tx, Toast.LENGTH_SHORT).show();
+            }
+        })
+
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+
+7、日历选择器
+
+8、照片选择器
+    进行照片选择时需要预加载图片，需要获取用户的权限，权限申请通过，则继续操作
+     //单选
+     ImageSelector.builder()
+     .useCamera(true) // 设置是否使用拍照
+     .setSingle(true)  //设置是否单选
+     .canPreview(true) //是否点击放大图片查看,，默认为true
+     .start(this, REQUEST_CODE); // 打开相册
+
+      //多选(最多9张)
+      ImageSelector.builder()
+      .useCamera(true) // 设置是否使用拍照
+      .setSingle(false)  //设置是否单选
+      .canPreview(true) //是否点击放大图片查看,，默认为true
+      .setMaxSelectCount(9) // 图片的最大选择数量，小于等于0时，不限数量。
+      .start(this, REQUEST_CODE); // 打开相册
+
+      //单选并剪裁
+      ImageSelector.builder()
+      .useCamera(true) // 设置是否使用拍照
+      .setCrop(true)  // 设置是否使用图片剪切功能。
+      .setCropRatio(1.0f) // 图片剪切的宽高比,默认1.0f。宽固定为手机屏幕的宽。
+      .setSingle(true)  //设置是否单选
+      .canPreview(true) //是否点击放大图片查看,，默认为true
+      .start(this, REQUEST_CODE); // 打开相册
+
+9、轮播控件
+    //布局中添加
+    <com.god2dog.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="10dp"
+        banner:indicator_normal_color="@android:color/white"
+        banner:indicator_selected_color="@color/colorPrimary" />
+
+        //设置适配器
+        banner.setAdapter(new BannerImageAdapter(DataBean.getTestData()));
+        //设置指示器
+        banner.setIndicator(new CircleIndicator(this));
+        //设置点击事件
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(Object data, int position) {
+                Snackbar.make(banner, ((DataBean) data).title, Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        //添加切换监听
+        banner.addOnPageChangeListener(this);
+        //圆角
+        banner.setBannerRound(BannerUtils.dp2px(5));
