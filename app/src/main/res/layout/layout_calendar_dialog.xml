@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y1000"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        >
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="取消"
+            android:textColor="#ff666666"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="选择日期"
+            android:textColor="#ff333333"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="确认"
+            android:textColor="#ff666666"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="日"
+            android:textColor="#ff4490f6"
+            android:textSize="14sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="一"
+            android:gravity="center"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="二"
+            android:gravity="center"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="三"
+            android:gravity="center"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="四"
+            android:gravity="center"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="五"
+            android:gravity="center"
+            android:textColor="#ff333333"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="六"
+            android:textColor="#ff4490f6"
+            android:textSize="14sp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <com.god2dog.calendarview.DayPickerView
+        android:id="@+id/dayPickerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:colorSelectedDayBackground="@color/colorBlue"
+        app:colorPreviousDayText="#FFFFFF"
+        app:colorNormalDayText="#727272"
+        app:colorYearMonthText="#727272"
+        app:colorWeekText="#727272"
+        app:colorInValidDaysText="#FFFFFF"
+
+
+        app:textSizeDay="14sp"
+        app:textSizeTag="12sp"
+        app:textSizeYearMonth="16sp"
+        app:textSizeWeek="14sp"
+        app:headerMonthHeight="50dp"
+        app:selectedDayRadius="20dp"
+        app:calendarHeight="320dp"
+        app:enablePreviousDay="true"
+        />
+
+</LinearLayout>

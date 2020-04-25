@@ -2,14 +2,20 @@ package com.god2dog.commonwidget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -17,6 +23,9 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.god2dog.addresspickerview.AddressPickerView;
 import com.god2dog.basecode.AddressModel;
+import com.god2dog.calendarview.DatePickerController;
+import com.god2dog.calendarview.DayPickerView;
+import com.god2dog.calendarview.SimpleMonthAdapter;
 import com.god2dog.dialoglibrary.BottomDialog;
 import com.god2dog.dialoglibrary.BottomListDialog;
 import com.god2dog.dialoglibrary.CustomDialog;
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private TimePickerView pvTime;
     private int[] i;
     private List<AddressModel> datas = new ArrayList<>();
+    private DayPickerView.DataModel dataModel;
 
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
@@ -55,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initData();
 
         initJson();
 
@@ -73,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
         initAddressStyleTwo();
     }
 
+    private void initData() {
+
+        dataModel = new DayPickerView.DataModel();
+        dataModel.yearStart = 1970;
+        dataModel.monthStart = 1;
+        dataModel.monthCount = 130 * 12;
+        dataModel.leastDaysNum = 1;
+        dataModel.mostDaysNum = 100;
+    }
+
     private void initTimeSelect() {
         findViewById(R.id.showTimePickerView).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAddressStyleTwo() {
-        Button addressStyleTwoButton =findViewById(R.id.showAddressSelectedView);
+        Button addressStyleTwoButton = findViewById(R.id.showAddressSelectedView);
 
 //        formatAddressData( datas);
 //
@@ -115,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         addressStyleTwoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(MainActivity.this,JsonDataActivity.class));
+                startActivity(new Intent(MainActivity.this, JsonDataActivity.class));
             }
         });
 
@@ -238,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.jump2CenterDialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,DialogActivity.class));
+                startActivity(new Intent(MainActivity.this, DialogActivity.class));
             }
         });
 
@@ -246,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.jump2CalendarView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CalendarViewActivity.class));
+                startActivity(new Intent(MainActivity.this, CalendarViewActivity.class));
             }
         });
 
@@ -254,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.jump2ImageSelector).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,ImageSelectorActivity.class));
+                startActivity(new Intent(MainActivity.this, ImageSelectorActivity.class));
             }
         });
 
@@ -262,21 +284,63 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.jump2BannerView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,BannerViewActivity.class));
+                startActivity(new Intent(MainActivity.this, BannerViewActivity.class));
             }
         });
         //用户中心
         findViewById(R.id.jump2UserCenter).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,UserActivity.class));
+                startActivity(new Intent(MainActivity.this, UserActivity.class));
             }
         });
         //tab
         findViewById(R.id.jump2Tab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,TabActivity.class));
+                startActivity(new Intent(MainActivity.this, TabActivity.class));
+            }
+        });
+        //展示日历弹框
+        findViewById(R.id.showCalendarDialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(MainActivity.this, R.style.Calendar_Dialog);
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_calendar_dialog, null);
+                TextView cancelAction = view.findViewById(R.id.tvCancel);
+                TextView confirmAction = view.findViewById(R.id.tvConfirm);
+                TextView title = view.findViewById(R.id.tvTitle);
+                DayPickerView pickerView = view.findViewById(R.id.dayPickerView);
+                pickerView.setParameter(dataModel, new DatePickerController() {
+                    @Override
+                    public void onDayOfMonthSelected(SimpleMonthAdapter.CalendarDay calendarDay) {
+                        //单选
+                    }
+
+                    @Override
+                    public void onDateRangeSelected(List<SimpleMonthAdapter.CalendarDay> selectedDays) {
+                        //多选
+                    }
+
+                    @Override
+                    public void alertSelectedFail(FailEven even) {
+
+                    }
+                });
+                cancelAction.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setContentView(view);
+                Window dialogWindow = dialog.getWindow();
+                dialogWindow.setGravity(Gravity.BOTTOM);
+                WindowManager.LayoutParams params = dialogWindow.getAttributes();
+                Display display = dialogWindow.getWindowManager().getDefaultDisplay();
+                params.height = display.getHeight() * 7 / 8;
+                dialogWindow.setAttributes(params);
+                dialog.show();
             }
         });
     }
@@ -424,12 +488,12 @@ public class MainActivity extends AppCompatActivity {
         //endDate.set(2020,1,1);
 
         //正确设置方式 原因：注意事项有说明
-        startDate.set(2013,0,1);
-        endDate.set(2020,11,31);
+        startDate.set(2013, 0, 1);
+        endDate.set(2020, 11, 31);
 
         pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
-            public void onTimeSelect(Date date,View v) {//选中事件回调
+            public void onTimeSelect(Date date, View v) {//选中事件回调
                 Toast.makeText(MainActivity.this, date.toString(), Toast.LENGTH_SHORT).show();
             }
         })
@@ -447,8 +511,8 @@ public class MainActivity extends AppCompatActivity {
                 .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                 .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
-                .setRangDate(startDate,endDate)//起始终止年月日设定
-                .setLabel("年","月","日","时","分","秒")//默认设置为年月日时分秒
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .isDialog(true)//是否显示为对话框样式
                 .build();
@@ -461,7 +525,6 @@ public class MainActivity extends AppCompatActivity {
                 timer.show();
             }
         });
-
 
 
     }

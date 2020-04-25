@@ -92,6 +92,15 @@ public class DayPickerView extends RecyclerView {
         scrollToCurrentPosition();
 
     }
+    /**
+     * 设置参数
+     *
+     * @param mController 回调监听
+     */
+    public void setParameter( DatePickerController mController) {
+        setParameter(new DataModel(),mController);
+
+    }
 
     private void scrollToCurrentPosition() {
         Calendar calendar = Calendar.getInstance();
@@ -107,12 +116,12 @@ public class DayPickerView extends RecyclerView {
 //        public enum TYPE {TYPE_MULTI, TYPE_RANGE, TYPE_ONLY_READ}
 
         //        TYPE type;                                       // 类型
-        public int yearStart;                                      // 日历开始的年份
-        public int monthStart;                                     // 日历开始的月份
-        public int monthCount;                                     // 要显示几个月
+        public int yearStart = 1970;                                      // 日历开始的年份
+        public int monthStart = 1;                                     // 日历开始的月份
+        public int monthCount = 130 * 12;                                     // 要显示几个月
         public SimpleMonthAdapter.SelectedDays<SimpleMonthAdapter.CalendarDay> selectedDays;  // 默认选择的日期
-        public int leastDaysNum;                                   // 至少选择几天
-        public int mostDaysNum;                                    // 最多选择几天
+        public int leastDaysNum = 1;                                   // 至少选择几天
+        public int mostDaysNum = 31;                                    // 最多选择几天
 //        public String defTag;                                      // 默认显示的标签
 //        public boolean displayTag;                               // 是否显示标签
     }

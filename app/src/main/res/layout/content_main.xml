@@ -107,7 +107,13 @@
         android:id="@+id/jump2CalendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="日历选择器"
+        android:text="日历选择器View"
+        />
+    <Button
+        android:id="@+id/showCalendarDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="日历选择器Dialog"
         />
     <Button
         android:id="@+id/jump2ImageSelector"

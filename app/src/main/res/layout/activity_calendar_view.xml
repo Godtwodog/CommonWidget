@@ -10,7 +10,6 @@
         android:id="@+id/dayPickerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:colorCurrentDay="@color/colorAccent"
         app:colorSelectedDayBackground="@color/colorBlue"
         app:colorPreviousDayText="#FFFFFF"
         app:colorNormalDayText="#727272"
