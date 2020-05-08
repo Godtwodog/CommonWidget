@@ -5,8 +5,10 @@ import android.content.Context;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,8 @@ public class CenterDialog extends Dialog {
     private TextView mSubhead;
     //文本内容
     private TextView mContent;
+    //滑动布局
+    private ScrollView mSVContent;
 
     private OnDialogClickedListener onDialogListener;
 
@@ -72,6 +76,7 @@ public class CenterDialog extends Dialog {
             mTitle = findViewById(R.id.tvMainTitle);
             mSubhead = findViewById(R.id.tvSubHead);
             mContent = findViewById(R.id.tvContent);
+            mSVContent = findViewById(R.id.svContent);
 
             mConfirmAction.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,6 +143,13 @@ public class CenterDialog extends Dialog {
             mContent.setVisibility(View.VISIBLE);
         }else {
             mContent.setVisibility(View.GONE);
+        }
+
+        int measuredHeight = mContent.getMeasuredHeight();
+        if (measuredHeight >= 300){
+            ViewGroup.LayoutParams params = mSVContent.getLayoutParams();
+            params.height = 300;
+            mSVContent.setLayoutParams(params);
         }
 
         if (cancelText != null){
